@@ -1,0 +1,76 @@
+/* Ljubica Majstorovic, Pavle Sarenac, Nikola Nikolic */
+body {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 100%;
+    background-color: lightgray;
+}
+
+.text-italic {
+    font-style: italic;
+}
+
+.dropdown-menu {
+    background-color: black;
+}
+
+.dropdown-item {
+    color: yellow;
+}
+
+.forma {
+    background-color: #f2f2f2;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.text-yellow {
+    color: yellow;
+}
+
+.btn:hover {
+    color: yellow;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    background-color: black;
+    color: yellow;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+}
+
+a.heading-link:link,
+a.heading-link:visited,
+a.heading-link:hover {
+    color: yellow;
+    text-decoration: none;
+}
+
+#artikli {
+    background-color: palegreen;
+    text-align: center;
+    padding: 5px;
+}
+
+img {
+    width: 125px;
+    height: 125px;
+    border: 5px solid darkslategray;
+    margin: 5px;
+}
+
+#filteri {
+    text-align: center;
+    margin-bottom: 20px;
+}
