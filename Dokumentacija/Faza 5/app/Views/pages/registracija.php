@@ -1,99 +1,106 @@
 <!-- Ljubica Majstorovic, Pavle Sarenac, Nikola Nikolic -->
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/index.css">
-    <title>MajstorNaKlik - Registracija</title>
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top text-center">
-                <a class="navbar-brand" href="index.html">
-                    <img src="/images/logo.jpg" alt="logo" height="100">
-                </a>
-                <h1 class="text-center">
-                    <a class="heading-link" href="index.html">MajstorNaKlik</a>
-                </h1>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="index.html"><span
-                                    class="text-yellow">Početna</span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-yellow" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="text-yellow">Meni</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="registracija.html">Registruj se</a></li>
-                                <li><a class="dropdown-item" href="logovanje.html">Uloguj se</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <div class="row text-italic text-center">
+        <div class="row text-center">
             <h1><strong>Registracija:</strong></h1>
         </div>
         <div class="row">
-            <form action="">
+            <form action="<?= site_url("Gost/submitRegistration") ?>" method="post">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Unesite korisničko ime...">
+                        <input type="text" name="ime" class="form-control" placeholder="Unesite Vaše ime..."
+                        value="<?= set_value("ime") ?>">
                     </div>
-                    <div class="col"></div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['ime'])) 
+                            echo $errors['ime'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Unesite mejl adresu...">
+                        <input type="text" name="prezime" class="form-control" placeholder="Unesite Vaše prezime..." value="<?= set_value("prezime") ?>">
                     </div>
-                    <div class="col"></div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['prezime'])) 
+                            echo $errors['prezime'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Unesite broj telefona...">
+                        <input type="text" name="username" class="form-control" placeholder="Unesite korisničko ime..." 
+                        value="<?= set_value("username") ?>">
                     </div>
-                    <div class="col"></div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['username'])) 
+                            echo $errors['username'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Unesite grad...">
+                        <input type="text" name="mail" class="form-control" placeholder="Unesite mejl adresu..." 
+                        value="<?= set_value("mail") ?>">
                     </div>
-                    <div class="col"></div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['mail'])) 
+                            echo $errors['mail'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Unesite lozinku...">
+                        <input type="text" name="phone" class="form-control" placeholder="Unesite broj telefona u formatu +381-6x-xxx-xxx(x)..." value="<?= set_value("phone") ?>">
                     </div>
-                    <div class="col"></div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['phone'])) 
+                            echo $errors['phone'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Potvrdite lozinku...">
+                        <select class="form-select form-select-lg" name="cities">
+                            <option>Izaberite grad:</option>
+                            <?php foreach ($gradovi as $grad) {
+                                $selected = ($grad->Naziv === set_value("cities")) ? "selected" : "";
+                                echo "<option $selected>$grad->Naziv</option>";
+                            }
+                            ?>
+                        </select>
                     </div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($cityError)) 
+                            echo $cityError;
+                        ?>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col"></div>
+                    <div class="col">
+                        <input type="password" name="pass" class="form-control" placeholder="Unesite lozinku..." value="<?= set_value("pass") ?>">
+                    </div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['pass'])) 
+                            echo $errors['pass'];
+                        ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <input type="password" name="password" class="form-control" placeholder="Potvrdite lozinku..." value="<?= set_value("password") ?>">
+                    </div>
+                    <div class="col errorMessages">
+                        <?php if(!empty($errors['password'])) 
+                            echo $errors['password'];
+                        ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col"></div>
@@ -102,13 +109,20 @@
                             Registruj se kao:
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="userType" type="radio" id="user-type-client">
+                            <input class="form-check-input" name="userType" type="radio" id="user-type-client" value="korisnik">
                             <label class="form-check-label" for="user-type-client">Korisnik</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="userType" type="radio" id="user-type-master">
+                            <input checked class="form-check-input" name="userType" type="radio" id="user-type-master" value="majstor">
                             <label class="form-check-label" for="user-type-master">Majstor</label>
                         </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-dark text-yellow">Registruj se</button>
                     </div>
                     <div class="col"></div>
                 </div>
@@ -122,7 +136,7 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        Imate nalog? Prijavite se <a class="click-here-link" href="logovanje.html">ovde.</a>
+                        Imate nalog? Prijavite se <?php echo anchor("Gost/prikazLogovanja", "ovde.") ?>
                     </div>
                     <div class="col"></div>
                 </div>

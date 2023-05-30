@@ -17,6 +17,33 @@ body {
     color: yellow;
 }
 
+.majstorLink:link {
+    color: black;
+    text-decoration: none;
+}
+
+.form-select {
+    font-size: medium;
+}
+
+#selectOptionPlaceholder {
+    color: gray;
+}
+
+.flex-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.errorMessages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+}
+
 .forma {
     background-color: #f2f2f2;
     border-radius: 15px;
@@ -25,6 +52,13 @@ body {
 
 .text-yellow {
     color: yellow;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30rem;
 }
 
 .btn:hover {
@@ -73,4 +107,8 @@ img {
 #filteri {
     text-align: center;
     margin-bottom: 20px;
+}
+
+.error-text {
+    color: red;
 }

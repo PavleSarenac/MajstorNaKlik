@@ -27,9 +27,9 @@ class Database extends Config
     public array $default = [
         'DSN'      => '',
         'hostname' => 'localhost',
-        'username' => '',
+        'username' => 'root',
         'password' => '',
-        'database' => '',
+        'database' => 'majstornaklik',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,
@@ -44,11 +44,11 @@ class Database extends Config
         'port'     => 3306,
     ];
 
-    /**
-     * This database connection is used when
-     * running PHPUnit database tests.
-     */
-    public array $tests = [
+	/**
+	 * This database connection is used when
+	 * running PHPUnit database tests.
+	 */
+	public array $tests = [
         'DSN'         => '',
         'hostname'    => '127.0.0.1',
         'username'    => '',
