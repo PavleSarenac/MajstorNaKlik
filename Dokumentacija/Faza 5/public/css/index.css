@@ -5,8 +5,37 @@ body {
     background-color: lightgray;
 }
 
+input.star {
+    display: none;
+    /* Hide the default radio button */
+}
+
+input.star+label::before {
+    content: '\2605';
+    /* Insert star symbol (☆) */
+    display: inline-block;
+    font-size: 2rem;
+    color: white;
+}
+
+input.star:checked+label::before {
+    content: '\2605';
+    /* Insert filled star symbol (★) when checked */
+    color: gold;
+    /* Change the color of the filled star */
+}
+
+
 .text-italic {
     font-style: italic;
+}
+
+.btn-down {
+    width: 30rem;
+}
+
+.btn-side {
+    width: 15rem;
 }
 
 .dropdown-menu {
@@ -44,12 +73,6 @@ body {
     color: red;
 }
 
-.forma {
-    background-color: #f2f2f2;
-    border-radius: 15px;
-    padding: 20px;
-}
-
 .text-yellow {
     color: yellow;
 }
@@ -65,23 +88,21 @@ body {
     color: yellow;
 }
 
+#emptyUserFooter {
+    height: 3rem;
+}
+
 input[type=text],
-input[type=password] {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0px;
-    border: 1px solid #cccccc;
-    box-sizing: border-box;
+input[type=password],
+select {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 button {
-    width: 100%;
     background-color: black;
     color: yellow;
-    padding: 14px 20px;
-    margin: 8px 0px;
-    border: none;
-    cursor: pointer;
+    margin: 0.5rem;
 }
 
 a.heading-link:link,
@@ -91,22 +112,9 @@ a.heading-link:hover {
     text-decoration: none;
 }
 
-#artikli {
-    background-color: palegreen;
-    text-align: center;
-    padding: 5px;
-}
-
 img {
-    width: 125px;
-    height: 125px;
-    border: 5px solid darkslategray;
-    margin: 5px;
-}
-
-#filteri {
-    text-align: center;
-    margin-bottom: 20px;
+    width: 8rem;
+    height: 8rem;
 }
 
 .error-text {

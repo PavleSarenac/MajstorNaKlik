@@ -239,7 +239,7 @@ class Gost extends BaseController
                     ]
                 ],
                 "phone" => [
-                    "rules" => "required|regex_match[/^\+381-/6\d-\d{3}-\d{3,4}$/]",
+                    "rules" => "required|regex_match[/^\+381-6\d-\d{3}-\d{3,4}$/]",
                     "errors" => [
                         "required" => "Obavezno je da unesete Vaš broj telefona.",
                         "regex_match" => "Telefon mora biti u formatu +381-6x-xxx-xxx(x)."

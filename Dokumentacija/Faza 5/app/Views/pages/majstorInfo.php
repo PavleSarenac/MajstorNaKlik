@@ -4,6 +4,7 @@
                 <h1><strong>Pregled profila majstora:</strong></h1>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col flex-center">
                 <?php
@@ -13,18 +14,18 @@
                             break;
                         case "Majstor":
                             if ($email != $session->get("tekuciMajstorPodaci")[0]->MejlAdresa) {
-                                echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                                echo "<button id='porukaMajstor' class='btn btn-side btn-dark text-yellow btn-style'>
                                 Ostavi poruku majstoru
                                 </button>";
                             } else {
-                                echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                                echo "<button class='btn btn-side btn-dark text-yellow btn-style'>
                                 Ažuriraj svoj profil
                                 </button>";
                             }
                             
                             break;
                         default:
-                            echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                            echo "<button id='porukaMajstor' class='btn btn-side btn-dark text-yellow btn-style'>
                             Ostavi poruku majstoru
                             </button>";
                             break;
@@ -50,15 +51,15 @@
                 <?php 
                     switch ($controller) {
                         case "Administrator":
-                            echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                            echo "<button class='btn btn-side btn-dark text-yellow btn-style'>
                                 Vidi sve prijave majstora
                                 </button>
-                                <button class='btn w-50 btn-dark text-yellow btn-style'>
+                                <button class='btn btn-side btn-dark text-yellow btn-style'>
                                     Izbaci majstora
                                 </button>";
                             break;
                         case "Korisnik":
-                            echo "<button class='btn w-50 btn-dark text-yellow btn-style'>Prijavi majstora</button>";
+                            echo "<button class='btn btn-side btn-dark text-yellow btn-style'>Prijavi majstora</button>";
                             break;
                     }
                 ?>
@@ -67,17 +68,38 @@
         <div class="row">
             <div class="col"></div>
             <div class="col flex-center">
-                <?php 
+                <?php
+                    $encId = rawurlencode($id);
+                    $encName = rawurlencode($name);
+                    $encSurname = rawurlencode($surname);
+                    $encSpecialty = rawurlencode($specialty);
                     if ($controller == "Korisnik") {
-                        echo "<button class='btn btn-dark text-yellow btn-style' id='oceniMajstora'>
-                        Ostavi svoj utisak o majstoru
-                        </button><button class='btn btn-dark text-yellow btn-style' id='recenzijeMajstora'>
-                        Procitaj recenzije majstora
-                        </button>";
+                        echo anchor(
+                                "Korisnik/showPageForRatingHandyman/$encId/$encName/$encSurname/$encSpecialty",
+                                "<button class='btn btn-down btn-dark text-yellow btn-style'>
+                                Ostavi svoj utisak o majstoru
+                                </button>" 
+                            ) .
+                            anchor(
+                                "$controller/readHandymanReviews",
+                                "<button class='btn btn-down btn-dark text-yellow btn-style'>
+                                Procitaj recenzije majstora
+                                </button>"
+                            );
+                    } else if ($controller == "Majstor" && $email == $session->get("tekuciMajstorPodaci")[0]->MejlAdresa) {
+                        echo anchor(
+                            "$controller/readHandymanReviews",
+                            "<button class='btn btn-down btn-dark text-yellow btn-style'>
+                            Procitaj svoje recenzije
+                            </button>"
+                        );
                     } else {
-                        echo "<button class='btn btn-dark text-yellow btn-style' id='recenzijeMajstora'>
-                        Procitaj recenzije majstora
-                        </button>";
+                        echo anchor(
+                            "$controller/readHandymanReviews",
+                            "<button class='btn btn-down btn-dark text-yellow btn-style'>
+                            Procitaj recenzije majstora
+                            </button>"
+                        );
                     }
                 ?>
             </div>

@@ -19,6 +19,16 @@ abstract class RegistrovaniKorisnik extends BaseController {
         return redirect()->to(site_url("/")); // idi na podrazumevanu pocetnu stranu
     }
 
+    /**
+     * vraca vrednosti author iz sesije
+     * 
+     * @return JSON file
+     */
+    public function getAuthorSession(){
+        $author = $this->session->get("author");
+        echo json_encode($author);
+    }
+
 }
 
 ?>

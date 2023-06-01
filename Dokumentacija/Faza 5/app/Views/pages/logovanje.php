@@ -49,7 +49,7 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <button type="submit" class="btn btn-dark text-yellow">Prijavi se</button>
+                        <button type="submit" class="btn btn-down btn-dark text-yellow">Prijavi se</button>
                     </div>
                     <div class="col"></div>
                 </div>

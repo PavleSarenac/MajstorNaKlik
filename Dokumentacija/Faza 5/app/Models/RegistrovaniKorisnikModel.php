@@ -69,4 +69,8 @@ class RegistrovaniKorisnikModel extends Model {
         ->join("telefon", "registrovani_korisnik.IdKor = telefon.IdKor")
         ->where("registrovani_korisnik.IdKor", $IdKor)->get()->getResult();
     }
+
+    public function getUserWithCertainMailAddress($mail){
+        return $this->where("MejlAdresa", $mail)->findAll();
+    }
 }

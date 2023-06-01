@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <button type="submit" class="btn btn-dark text-yellow">Registruj se</button>
+                        <button type="submit" class="btn btn-down btn-dark text-yellow">Registruj se</button>
                     </div>
                     <div class="col"></div>
                 </div>

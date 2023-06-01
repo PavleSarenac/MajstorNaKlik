@@ -77,4 +77,160 @@ $(document).ready(function () {
         };
     });
 
+    // Price review
+    $("#price-star-1").on("click", function () {
+        for (let i = 1; i <= 1; i++) {
+            $("#price-star-" + i).prop("checked", true);
+        }
+        for (let i = 2; i <= 5; i++) {
+            $("#price-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#price-star-2").on("click", function () {
+        for (let i = 1; i <= 2; i++) {
+            $("#price-star-" + i).prop("checked", true);
+        }
+        for (let i = 3; i <= 5; i++) {
+            $("#price-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#price-star-3").on("click", function () {
+        for (let i = 1; i <= 3; i++) {
+            $("#price-star-" + i).prop("checked", true);
+        }
+        for (let i = 4; i <= 5; i++) {
+            $("#price-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#price-star-4").on("click", function () {
+        for (let i = 1; i <= 4; i++) {
+            $("#price-star-" + i).prop("checked", true);
+        }
+        for (let i = 5; i <= 5; i++) {
+            $("#price-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#price-star-5").on("click", function () {
+        for (let i = 1; i <= 5; i++) {
+            $("#price-star-" + i).prop("checked", true);
+        }
+    });
+
+    // Speed review
+    $("#speed-star-1").on("click", function () {
+        for (let i = 1; i <= 1; i++) {
+            $("#speed-star-" + i).prop("checked", true);
+        }
+        for (let i = 2; i <= 5; i++) {
+            $("#speed-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#speed-star-2").on("click", function () {
+        for (let i = 1; i <= 2; i++) {
+            $("#speed-star-" + i).prop("checked", true);
+        }
+        for (let i = 3; i <= 5; i++) {
+            $("#speed-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#speed-star-3").on("click", function () {
+        for (let i = 1; i <= 3; i++) {
+            $("#speed-star-" + i).prop("checked", true);
+        }
+        for (let i = 4; i <= 5; i++) {
+            $("#speed-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#speed-star-4").on("click", function () {
+        for (let i = 1; i <= 4; i++) {
+            $("#speed-star-" + i).prop("checked", true);
+        }
+        for (let i = 5; i <= 5; i++) {
+            $("#speed-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#speed-star-5").on("click", function () {
+        for (let i = 1; i <= 5; i++) {
+            $("#speed-star-" + i).prop("checked", true);
+        }
+    });
+
+    // Quality review
+    $("#quality-star-1").on("click", function () {
+        for (let i = 1; i <= 1; i++) {
+            $("#quality-star-" + i).prop("checked", true);
+        }
+        for (let i = 2; i <= 5; i++) {
+            $("#quality-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#quality-star-2").on("click", function () {
+        for (let i = 1; i <= 2; i++) {
+            $("#quality-star-" + i).prop("checked", true);
+        }
+        for (let i = 3; i <= 5; i++) {
+            $("#quality-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#quality-star-3").on("click", function () {
+        for (let i = 1; i <= 3; i++) {
+            $("#quality-star-" + i).prop("checked", true);
+        }
+        for (let i = 4; i <= 5; i++) {
+            $("#quality-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#quality-star-4").on("click", function () {
+        for (let i = 1; i <= 4; i++) {
+            $("#quality-star-" + i).prop("checked", true);
+        }
+        for (let i = 5; i <= 5; i++) {
+            $("#quality-star-" + i).prop("checked", false);
+        }
+    });
+
+    $("#quality-star-5").on("click", function () {
+        for (let i = 1; i <= 5; i++) {
+            $("#quality-star-" + i).prop("checked", true);
+        }
+    });
+
+    $("#reviewForm").submit(function (event) {
+        let priceRated = false;
+        let speedRated = false;
+        let qualityRated = false;
+        // Check price rating
+        for (let i = 1; i <= 5; i++) {
+            if ($("#price-star-" + i).prop("checked") == true) {
+                priceRated = true;
+            }
+        }
+        // Check speed rating
+        for (let i = 1; i <= 5; i++) {
+            if ($("#speed-star-" + i).prop("checked") == true) {
+                speedRated = true;
+            }
+        }
+        // Check quality rating
+        for (let i = 1; i <= 5; i++) {
+            if ($("#quality-star-" + i).prop("checked") == true) {
+                qualityRated = true;
+            }
+        }
+        if (!priceRated || !speedRated || !qualityRated) {
+            alert("Niste ocenili majstora po svim parametrima!");
+            event.preventDefault();
+        }
+    });
 });

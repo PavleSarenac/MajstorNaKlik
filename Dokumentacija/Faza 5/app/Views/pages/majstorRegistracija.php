@@ -38,7 +38,7 @@
                 <div class="row mx-auto">
                     <div class="col"></div>
                     <div class="col mx-auto">
-                        <button type="submit" class="btn btn-dark text-yellow">Potvrdi</button>
+                        <button type="submit" class="btn btn-down btn-dark text-yellow">Potvrdi</button>
                     </div>
                     <div class="col"></div>
                 </div>

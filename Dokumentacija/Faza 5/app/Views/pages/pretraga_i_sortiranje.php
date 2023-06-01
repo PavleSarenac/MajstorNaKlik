@@ -23,6 +23,9 @@
                             <h3>Majstor</h3>
                         </div>
                         <div class='col text-center'>
+                            <h3>Broj recenzija</h3>
+                        </div>
+                        <div class='col text-center'>
                             <h3>Prosečna cena</h3>
                         </div>
                         <div class='col text-center'>
@@ -42,6 +45,7 @@
                     $cnt++;
                     $newHandyman = "<div class='alert alert-light' role='alert'><div class='row'>" .
                     "<div class='col text-center'>" . $result->Ime . " " . $result->Prezime . "</div>" .
+                    "<div class='col text-center'>" . ($result->BrojRecenzija ?? "Nije ocenjen.") . "</div>" .
                     "<div class='col text-center'>" . ($result->ProsecnaCena ?? "Nije ocenjen.") . "</div>" . 
                     "<div class='col text-center'>" . ($result->ProsecnaBrzina ?? "Nije ocenjen.") . "</div>" .
                     "<div class='col text-center'>" . ($result->ProsecanKvalitet ?? "Nije ocenjen.") . "</div></div></div>";
@@ -51,8 +55,9 @@
                     $encodedCity = rawurlencode($result->Naziv);
                     $encodedPhone = urlencode($result->Telefon);
                     $encodedMail = rawurlencode($result->MejlAdresa);
+                    $id = rawurlencode($result->IdKor);
                     echo anchor(
-                        "$controller/prikazProfilaMajstora/$encodedName/$encodedSurname/$encodedSpecialty/$encodedCity/$encodedPhone/$encodedMail",
+                        "$controller/prikazProfilaMajstora/$encodedName/$encodedSurname/$encodedSpecialty/$encodedCity/$encodedPhone/$encodedMail/$id",
                         $newHandyman,
                         array('class' => 'majstorLink')
                     );

@@ -6,11 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <!-- bootstrap and jquery -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery-3.7.0.min.js"></script>
+    <!-- style -->
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/ChatDesign.css">
+    <!-- script -->
     <script src="/js/script.js"></script>
+    <script src="/js/cetovanje.js"></script>
+    <script src="/js/scriptMajstorInfo.js"></script>
     <title>MajstorNaKlik</title>
 </head>
 
@@ -63,8 +69,9 @@
                                             $city = rawurlencode($session->get("tekuciMajstorPodaci")[0]->Naziv);
                                             $phone = rawurlencode($session->get("tekuciMajstorPodaci")[0]->Telefon);
                                             $email = rawurlencode($session->get("tekuciMajstorPodaci")[0]->MejlAdresa);
+                                            $id = rawurlencode($session->get("tekuciMajstorPodaci")[0]->IdKor);
                                             echo "<li>" . anchor(
-                                                "Majstor/prikazProfilaMajstora/$name/$surname/$specialty/$city/$phone/$email", 
+                                                "Majstor/prikazProfilaMajstora/$name/$surname/$specialty/$city/$phone/$email/$id", 
                                                 "Moj profil", 
                                                 array('class' => 'dropdown-item')) . "</li>" .
                                             "<li>" . anchor("Majstor/logout", "Izloguj se", array('class' => 'dropdown-item')) . "</li>";
@@ -77,8 +84,9 @@
                                             $city = rawurlencode($session->get("tekuciKorisnikPodaci")[0]->Naziv);
                                             $phone = rawurlencode($session->get("tekuciKorisnikPodaci")[0]->Telefon);
                                             $email = rawurlencode($session->get("tekuciKorisnikPodaci")[0]->MejlAdresa);
+                                            $id = rawurlencode($session->get("tekuciKorisnikPodaci")[0]->IdKor);
                                             echo "<li>" . anchor(
-                                                "Korisnik/prikazProfilaKorisnika/$name/$surname/$city/$phone/$email", 
+                                                "Korisnik/prikazProfilaKorisnika/$name/$surname/$city/$phone/$email/$id", 
                                                 "Moj profil", 
                                                 array('class' => 'dropdown-item')) . "</li>" .
                                             "<li>" . anchor("Korisnik/logout", "Izloguj se", array('class' => 'dropdown-item')) . "</li>";

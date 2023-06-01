@@ -78,24 +78,26 @@ abstract class BaseController extends Controller
      * 
      * @return void
      */
-    public function prikazProfilaMajstora($name, $surname, $specialty, $city, $phone, $email) {
+    public function prikazProfilaMajstora($name, $surname, $specialty, $city, $phone, $email, $id) {
         $this->show("majstorInfo", [
             "name" => $name,
             "surname" => $surname,
             "specialty" => $specialty,
             "city" => $city,
             "phone" => $phone,
-            "email" => $email
+            "email" => $email,
+            "id" => $id
         ]);
     }
 
-    public function prikazProfilaKorisnika($name, $surname, $city, $phone, $email) {
+    public function prikazProfilaKorisnika($name, $surname, $city, $phone, $email, $id) {
         $this->show("korisnikInfo", [
             "name" => $name,
             "surname" => $surname,
             "city" => $city,
             "phone" => $phone,
-            "email" => $email
+            "email" => $email,
+            "id" => $id
         ]);
     }
 
@@ -133,6 +135,10 @@ abstract class BaseController extends Controller
 
     }
 
+    public function readHandymanReviews() {
+        $this->show("pregled_ocena", []);
+    }
+
     /**
      * Ova funkcija se izvrsava kao posledica AJAX zahteva kada korisnik scroll-uje kroz rezultate svoje pretrage i dodje do dna 
      * stranice - tada se dinamicki ucitava novi blok majstora u stranicu.
@@ -149,6 +155,7 @@ abstract class BaseController extends Controller
         foreach ($currentBlock as $result) {
             $newHandyman = "<div class='alert alert-light' role='alert'><div class='row'>" .
             "<div class='col text-center'>" . $result->Ime . " " . $result->Prezime . "</div>" .
+            "<div class='col text-center'>" . ($result->BrojRecenzija ?? "Nije ocenjen.") . "</div>" .
             "<div class='col text-center'>" . ($result->ProsecnaCena ?? "Nije ocenjen.") . "</div>" . 
             "<div class='col text-center'>" . ($result->ProsecnaBrzina ?? "Nije ocenjen.") . "</div>" .
             "<div class='col text-center'>" . ($result->ProsecanKvalitet ?? "Nije ocenjen.") . "</div></div></div>";
@@ -158,8 +165,9 @@ abstract class BaseController extends Controller
             $encodedCity = rawurlencode($result->Naziv);
             $encodedPhone = rawurlencode($result->Telefon);
             $encodedMail = rawurlencode($result->MejlAdresa);
+            $id = rawurlencode($result->IdKor);
             $newResultBlock .= anchor(
-                "$controller/prikazProfilaMajstora/$encodedName/$encodedSurname/$encodedSpecialty/$encodedCity/$encodedPhone/$encodedMail",
+                "$controller/prikazProfilaMajstora/$encodedName/$encodedSurname/$encodedSpecialty/$encodedCity/$encodedPhone/$encodedMail/$id",
                 $newHandyman,
                 array('class' => 'majstorLink')
             );

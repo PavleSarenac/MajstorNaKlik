@@ -4,6 +4,7 @@
                 <h1><strong>Pregled profila korisnika:</strong></h1>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col flex-center">
                 <?php
@@ -61,6 +62,9 @@
                     }
                 ?>
             </div>
+        </div>
+        <div class="row" id="emptyUserFooter">
+
         </div>
     </div>
 </body>

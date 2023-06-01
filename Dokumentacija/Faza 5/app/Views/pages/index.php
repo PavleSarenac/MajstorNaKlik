@@ -2,6 +2,7 @@
         <div class="row text-center">
             <h1><strong>Pretražite majstore:</strong></h1>
         </div>
+        <hr>
         <div class="row">
             <form name="search" method="get" action="<?php echo site_url("$controller/search") ?>">
                 <div class="row">
@@ -96,27 +97,12 @@
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <button id="submit-btn" type="submit" class="btn btn-dark text-yellow">Pretraži</button>
+                        <button id="submit-btn" type="submit" class="btn btn-down btn-dark text-yellow">Pretraži</button>
                     </div>
                     <div class="col"></div>
                 </div>
             </form>
         </div>
-        <?php 
-            $session = session();
-            if ($session->has("author")) {
-                $author = $session->get("author");
-                if ($author->TipKorisnika == "K") {
-                    echo "<div class='row'>
-                    <div class='col'></div>
-                    <div class='col'>
-                        <button type='button' class='btn btn-dark text-yellow' id='chatGPT-btn'>Pitajte majstora Mileta</button>
-                    </div>
-                    <div class='col'></div>
-                    </div>";
-                }
-            }
-        ?>
     </div>
 </body>
 

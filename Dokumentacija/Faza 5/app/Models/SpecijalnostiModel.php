@@ -94,6 +94,8 @@ class SpecijalnostiModel extends Model {
         } else if ($qualitySort == "qualityDesc") {
             $builder->orderBy("majstor.ProsecanKvalitet", "DESC");
         }
+
+        $builder->orderBy("majstor.BrojRecenzija", "DESC");
         
         return $builder->get()->getResult();
     }

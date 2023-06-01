@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 30, 2023 at 04:29 AM
+-- Generation Time: Jun 01, 2023 at 07:24 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -80,6 +80,7 @@ INSERT INTO `grad` (`IdGra`, `Naziv`) VALUES
 DROP TABLE IF EXISTS `majstor`;
 CREATE TABLE IF NOT EXISTS `majstor` (
   `IdMaj` int NOT NULL,
+  `BrojRecenzija` int DEFAULT NULL,
   `ProsecnaCena` decimal(10,2) DEFAULT NULL,
   `ProsecnaBrzina` decimal(10,2) DEFAULT NULL,
   `ProsecanKvalitet` decimal(10,2) DEFAULT NULL,
@@ -92,24 +93,25 @@ CREATE TABLE IF NOT EXISTS `majstor` (
 -- Dumping data for table `majstor`
 --
 
-INSERT INTO `majstor` (`IdMaj`, `ProsecnaCena`, `ProsecnaBrzina`, `ProsecanKvalitet`, `IdSpec`) VALUES
-(26, NULL, NULL, NULL, 67),
-(27, NULL, NULL, NULL, 90),
-(28, NULL, NULL, NULL, 73),
-(29, NULL, NULL, NULL, 30),
-(30, NULL, NULL, NULL, 81),
-(31, NULL, NULL, NULL, 70),
-(32, NULL, NULL, NULL, 21),
-(33, NULL, NULL, NULL, 57),
-(34, NULL, NULL, NULL, 82),
-(35, NULL, NULL, NULL, 33),
-(36, NULL, NULL, NULL, 17),
-(37, NULL, NULL, NULL, 58),
-(38, NULL, NULL, NULL, 52),
-(39, NULL, NULL, NULL, 29),
-(40, NULL, NULL, NULL, 53),
-(41, NULL, NULL, NULL, 81),
-(42, NULL, NULL, NULL, 73);
+INSERT INTO `majstor` (`IdMaj`, `BrojRecenzija`, `ProsecnaCena`, `ProsecnaBrzina`, `ProsecanKvalitet`, `IdSpec`) VALUES
+(26, 3, '4.00', '3.67', '4.00', 67),
+(27, 3, '3.33', '3.67', '3.33', 90),
+(28, 4, '4.50', '4.25', '4.25', 73),
+(29, 3, '4.00', '3.67', '3.33', 30),
+(30, 3, '4.00', '3.67', '3.33', 81),
+(31, 3, '2.33', '1.67', '1.67', 70),
+(32, 3, '3.33', '3.67', '3.67', 21),
+(33, 3, '3.67', '4.00', '3.67', 57),
+(34, 3, '3.00', '4.33', '4.33', 82),
+(35, 3, '5.00', '4.67', '5.00', 33),
+(36, 3, '2.67', '3.00', '2.33', 17),
+(37, 3, '3.33', '2.00', '3.00', 58),
+(38, 3, '2.33', '2.33', '2.67', 52),
+(39, NULL, NULL, NULL, NULL, 29),
+(40, NULL, NULL, NULL, NULL, 53),
+(41, NULL, NULL, NULL, NULL, 81),
+(42, NULL, NULL, NULL, NULL, 73),
+(49, NULL, NULL, NULL, NULL, 29);
 
 -- --------------------------------------------------------
 
@@ -119,15 +121,33 @@ INSERT INTO `majstor` (`IdMaj`, `ProsecnaCena`, `ProsecnaBrzina`, `ProsecanKvali
 
 DROP TABLE IF EXISTS `poruka`;
 CREATE TABLE IF NOT EXISTS `poruka` (
-  `IdP` int NOT NULL,
+  `IdP` int NOT NULL AUTO_INCREMENT,
   `Tekst` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `DatumVreme` datetime NOT NULL,
   `IdPos` int NOT NULL,
   `IdPri` int NOT NULL,
+  `Status` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`IdP`),
   KEY `IdMaj` (`IdPos`,`IdPri`),
   KEY `IdKli` (`IdPri`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `poruka`
+--
+
+INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) VALUES
+(1, 'cao', '2023-06-01 14:03:00', 47, 32, 'pos'),
+(2, 'aaa', '2023-06-01 14:05:24', 47, 32, 'pos'),
+(3, 'daa', '2023-06-01 14:05:30', 47, 32, 'pos'),
+(4, 'aa', '2023-06-01 14:07:34', 47, 32, 'pos'),
+(5, 'fafsa', '2023-06-01 14:10:26', 47, 32, 'pos'),
+(6, 'asafs', '2023-06-01 14:10:29', 47, 32, 'pos'),
+(7, 'a', '2023-06-01 14:10:30', 47, 32, 'pos'),
+(8, 'aa', '2023-06-01 14:10:33', 47, 32, 'pos'),
+(9, 's', '2023-06-01 14:10:57', 47, 32, 'pos'),
+(10, 'a', '2023-06-01 14:10:59', 47, 32, 'pos'),
+(11, 'ddd', '2023-06-01 14:11:03', 47, 32, 'pos');
 
 -- --------------------------------------------------------
 
@@ -156,11 +176,57 @@ DROP TABLE IF EXISTS `recenzija`;
 CREATE TABLE IF NOT EXISTS `recenzija` (
   `IdKli` int NOT NULL,
   `IdMaj` int NOT NULL,
-  `Tekst` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `Tekst` varchar(1000) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `DatumVreme` datetime NOT NULL,
   PRIMARY KEY (`IdKli`,`IdMaj`),
   KEY `IdMaj` (`IdMaj`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `recenzija`
+--
+
+INSERT INTO `recenzija` (`IdKli`, `IdMaj`, `Tekst`, `DatumVreme`) VALUES
+(43, 28, 'Sve pohvale. Svaka cast. Bravo. Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.', '2023-06-01 21:23:57'),
+(45, 26, '', '2023-06-01 21:12:59'),
+(45, 27, '', '2023-06-01 21:13:06'),
+(45, 28, '', '2023-06-01 21:13:13'),
+(45, 29, '', '2023-06-01 21:13:20'),
+(45, 30, '', '2023-06-01 21:13:27'),
+(45, 31, '', '2023-06-01 21:13:36'),
+(45, 32, '', '2023-06-01 21:13:45'),
+(45, 33, '', '2023-06-01 21:14:07'),
+(45, 34, '', '2023-06-01 21:14:14'),
+(45, 35, '', '2023-06-01 21:14:58'),
+(45, 36, '', '2023-06-01 21:15:06'),
+(45, 37, '', '2023-06-01 21:15:16'),
+(45, 38, '', '2023-06-01 21:15:24'),
+(47, 26, 'sve pohvale', '2023-06-01 21:00:09'),
+(47, 27, '', '2023-06-01 21:04:24'),
+(47, 28, 'Pravi automehanicar. Radi svoj posao s ljubavlju. Sve preporuke.', '2023-06-01 21:03:48'),
+(47, 29, '', '2023-06-01 21:04:32'),
+(47, 30, 'dobar zna matu\r\n', '2023-06-01 21:03:02'),
+(47, 31, 'jeftin, ali nema pojma', '2023-06-01 21:02:12'),
+(47, 32, '', '2023-06-01 21:04:43'),
+(47, 33, '', '2023-06-01 21:05:04'),
+(47, 34, '', '2023-06-01 21:04:53'),
+(47, 35, '', '2023-06-01 21:05:20'),
+(47, 36, '', '2023-06-01 21:05:36'),
+(47, 37, '', '2023-06-01 21:05:46'),
+(47, 38, '', '2023-06-01 21:05:28'),
+(48, 26, '', '2023-06-01 20:47:48'),
+(48, 27, '', '2023-06-01 21:06:23'),
+(48, 28, '', '2023-06-01 21:06:31'),
+(48, 29, '', '2023-06-01 21:06:45'),
+(48, 30, '', '2023-06-01 21:06:54'),
+(48, 31, '', '2023-06-01 21:07:02'),
+(48, 32, '', '2023-06-01 21:07:10'),
+(48, 33, '', '2023-06-01 21:07:17'),
+(48, 34, '', '2023-06-01 21:07:25'),
+(48, 35, '', '2023-06-01 21:07:50'),
+(48, 36, '', '2023-06-01 21:07:59'),
+(48, 37, '', '2023-06-01 21:08:07'),
+(48, 38, '', '2023-06-01 21:08:15');
 
 -- --------------------------------------------------------
 
@@ -184,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `registrovani_korisnik` (
   UNIQUE KEY `KorisnickoIme` (`KorisnickoIme`),
   KEY `IdGra` (`IdGra`),
   KEY `IdSli` (`IdSli`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `registrovani_korisnik`
@@ -216,7 +282,8 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (45, 'Nataša', 'Majstorović', 'tasta@gmail.com', 'tasta', 'tasta123', 16, NULL, 'K'),
 (46, 'Olivera', 'Antić', 'majka@gmail.com', 'majka', 'majka123', 9, NULL, 'K'),
 (47, 'Igor', 'Šarenac', 'tata@gmail.com', 'tata', 'tata123', 25, NULL, 'K'),
-(48, 'Branko', 'Majstorović', 'branko@gmail.com', 'tast', 'tast123', 25, NULL, 'K');
+(48, 'Branko', 'Majstorović', 'branko@gmail.com', 'tast', 'tast123', 25, NULL, 'K'),
+(49, 'Miloš', 'Miladinović', 'losmi@gmail.com', 'losmi', 'losmi123', 24, NULL, 'M');
 
 -- --------------------------------------------------------
 
@@ -381,7 +448,8 @@ INSERT INTO `telefon` (`IdKor`, `Telefon`) VALUES
 (45, '+381-62-468-313'),
 (46, '+381-62-468-313'),
 (47, '+381-62-468-313'),
-(48, '+381-62-468-313');
+(48, '+381-62-468-313'),
+(49, '+381-62-468-313');
 
 -- --------------------------------------------------------
 
