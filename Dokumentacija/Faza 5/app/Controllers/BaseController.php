@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\RecenzijaModel;
 use App\Models\SpecijalnostiModel;
+use App\Models\RegistrovaniKorisnikModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -228,4 +229,34 @@ abstract class BaseController extends Controller
         echo $newResultBlock;
     }
     
+     /**
+     * vraca vrednosti author iz sesije
+     * 
+     * @return JSON file
+     */
+    public function getAuthorSession(){
+        $session = session();
+        $author = "";
+        if ($session->has("author")) {
+            $author = $session->get("author");
+        }
+        else $author = "null";
+        echo json_encode($author);
+    }
+
+    /**
+     * nadji username od id iz POST niza
+     * 
+     * @return JSON file
+     */
+    public function getUsernameFromId(){
+        $idReceiver = isset($_POST['idReceiver']) ? $_POST['idReceiver'] : null;
+        $regKorModel = new RegistrovaniKorisnikModel();
+        $korisnik = $regKorModel->getUsernameFromId($idReceiver);
+        if($korisnik)$korisnik = $korisnik[0];
+        echo json_encode($korisnik->KorisnickoIme);
+    }
+
+
+
 }

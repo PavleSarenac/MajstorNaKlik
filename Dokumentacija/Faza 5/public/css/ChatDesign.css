@@ -1,3 +1,4 @@
+
 /* Chat box container */
 .cont {
   max-width: 60vw;
@@ -9,6 +10,7 @@
 /* Chat messages */
 .chat-box {
   height: 60vh;
+  width: auto;
   overflow-y: scroll;
   border: 1px solid #ddd;
   padding: 10px;
@@ -48,6 +50,7 @@
 /* Message content */
 .contentChat {
   margin-left: 10px;
+  word-wrap: break-word;
 }
 
 /* Timestamp */

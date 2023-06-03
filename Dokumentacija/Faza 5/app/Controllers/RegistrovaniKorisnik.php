@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\PorukaModel;
+
 /**
  * Ova klasa sluzi kao osnovna za sve registrovane korisnike.
  * 
@@ -20,15 +22,16 @@ abstract class RegistrovaniKorisnik extends BaseController {
     }
 
     /**
-     * vraca vrednosti author iz sesije
+     * vraca niz poruka koje su namenjene za autora ciji se id cita iz niza POST
      * 
      * @return JSON file
      */
-    public function getAuthorSession(){
-        $author = $this->session->get("author");
-        echo json_encode($author);
+    public function checkMessagesForAuthor(){
+        $authorId = isset($_POST['authorMessages']) ? $_POST['authorMessages'] : null;
+        $porukaModel = new PorukaModel();
+        $poruke = $porukaModel->getAllReceivedMessages($authorId);
+        echo json_encode($poruke);
     }
-
 }
 
 ?>

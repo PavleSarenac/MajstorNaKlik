@@ -18,6 +18,7 @@
     <script src="/js/script.js"></script>
     <script src="/js/cetovanje.js"></script>
     <script src="/js/scriptMajstorInfo.js"></script>
+    <script src="/js/receiver.js"></script>
     <title>MajstorNaKlik</title>
 </head>
 
@@ -39,6 +40,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">
+                                <?php 
+                                    $session = session();
+                                    if ($session->has("author")){
+                                        echo "<span class='text-yellow'>Poruke</span>
+                                        <span class='badgeMy'>0</span>";
+                                    }
+                                ?>
+                                
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="<?php echo site_url("/") ?>"><span
                                     class="text-yellow">Početna</span></a>
                         </li>
@@ -49,7 +62,6 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <?php
-                                $session = session();
                                 if ($session->has("author")) {
                                     $author = $session->get("author");
                                     $authorType = $author->TipKorisnika;

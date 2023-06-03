@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use CodeIgniter\I18n\Time;
 
 /**
  * PorukaModel - klasa za implementaciju funkcionalnosti za koriscenje tabele iz baze podataka
@@ -39,7 +40,7 @@ class PorukaModel extends Model
     {
         $data = array(
             'Tekst' => $message,
-            'DatumVreme' => date('Y-m-d H:i:s'),
+            'DatumVreme' => Time::now("Europe/Belgrade", "en_US"),
             'IdPos' => $IdFrom,
             'IdPri' => $IdTo,
             'Status'=> "pos",
@@ -62,6 +63,71 @@ class PorukaModel extends Model
             return $poruka->DatumVreme;
         else 
             return null;
+    }
+
+    public function getAllReceivedMessages($IdTo){
+        $poruke = $this->select('IdPos, COUNT(*) as BrojPoruka')
+                    ->where("IdPri", $IdTo)
+                    ->where("Status", "pos")
+                    ->groupBy('IdPos')
+                    ->orderBy("DatumVreme", "ASC")
+                    ->findAll();
+
+        if($poruke == null){
+            return null;
+        } 
+
+        return $poruke;
+    }
+
+    public function getAllMessages($id, $idTo){
+        $poruke = $this->select()
+        ->where("(IdPri = $id AND IdPos = $idTo) OR (IdPri = $idTo AND IdPos = $id)")
+        ->orderBy('DatumVreme', 'ASC')
+        ->findAll();
+
+        if($poruke == null){
+            return null;
+        } 
+
+        return $poruke;
+    }
+
+    /**
+     * azurira status poruka, gde je autor(idFrom) primalac, na procitan
+     * 
+     * @param integer $idFrom
+     * 
+     * @param integer $idTo
+     */
+    public function setMessagesSeen($idFrom, $idTo){
+        $this->set(['Status' => 'pro'])
+        ->where('IdPri', $idFrom)
+        ->where('IdPos', $idTo)
+        ->update();
+    }
+
+    /**
+     * prima obavestenje o primljenim porukama ali ne od osobe sa kojom se trenutno cetuje
+     * 
+     * @param integer $authorid
+     * 
+     * @param integer $IdTo
+     */
+    public function getAllReceivedMessagesWhileInChat($authorId, $idTo){
+        $poruke = $this->select('IdPos, COUNT(*) as BrojPoruka')
+                    ->where("IdPri", $authorId)
+                    ->where("IdPos !=", $idTo)
+                    ->where("Status", "pos")
+                    ->groupBy('IdPos')
+                    ->orderBy("DatumVreme", "ASC")
+                    ->findAll();
+
+        if($poruke == null){
+            return null;
+        } 
+
+        return $poruke;
     }
 
 }

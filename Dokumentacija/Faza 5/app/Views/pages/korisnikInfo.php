@@ -14,7 +14,7 @@
                             break;
                         case "Korisnik":
                             if ($email != $session->get("tekuciKorisnikPodaci")[0]->MejlAdresa) {
-                                echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                                echo "<button id='porukaMajstor' class='btn w-50 btn-dark text-yellow btn-style'>
                                 Ostavi poruku korisniku
                                 </button>";
                             } else {
@@ -24,7 +24,7 @@
                             }
                             break;
                         default:
-                            echo "<button class='btn w-50 btn-dark text-yellow btn-style'>
+                            echo "<button id='porukaMajstor' class='btn w-50 btn-dark text-yellow btn-style'>
                             Ostavi poruku korisniku
                             </button>";
                             break;

@@ -73,4 +73,8 @@ class RegistrovaniKorisnikModel extends Model {
     public function getUserWithCertainMailAddress($mail){
         return $this->where("MejlAdresa", $mail)->findAll();
     }
+
+    public function getUsernameFromId($id){
+        return $this->where("IdKor", $id)->findAll();
+    }
 }

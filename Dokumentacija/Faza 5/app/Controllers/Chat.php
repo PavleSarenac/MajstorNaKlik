@@ -47,6 +47,41 @@ class Chat extends BaseController
         $response = [$user, $message, $timestamp];
         echo json_encode($response);
     }
+
+    public function setReadMessages(){
+        $idFrom = isset($_POST['idFrom']) ? $_POST['idFrom'] : null;
+        $idTo = isset($_POST['idTo']) ? $_POST['idTo'] : null;
+        $porukaModel = new PorukaModel();
+        $porukaModel->setMessagesSeen($idFrom, $idTo);
+        echo "primljeno";
+    }
+
+    /**
+     * vraca niz poruka koje su namenjene za autora ciji se id cita iz niza POST
+     * posebna implementacija jer ne zelimo proveru za tekuci cet
+     * 
+     * @return JSON file
+     */
+    public function checkMessagesForAuthor(){
+        $authorId = isset($_POST['authorMessages']) ? $_POST['authorMessages'] : null;
+        $IdTo = isset($_POST['idTo']) ? $_POST['idTo'] : null;
+        $porukaModel = new PorukaModel();
+        $poruke = $porukaModel->getAllReceivedMessagesWhileInChat($authorId, $IdTo);
+        echo json_encode($poruke);
+    }
+
+    /**
+     * vraca sve poruke jednog korisnika
+     * 
+     * @return JSON file
+     */
+    public function getAllMessages(){
+        $IdFrom = isset($_POST['idFrom']) ? $_POST['idFrom'] : null;
+        $IdTo = isset($_POST['idTo']) ? $_POST['idTo'] : null;
+        $porukaModel = new PorukaModel();
+        $poruke = $porukaModel->getAllMessages($IdFrom, $IdTo);
+        return json_encode($poruke);
+    }
 }
 
 ?>

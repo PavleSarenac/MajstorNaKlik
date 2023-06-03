@@ -1,14 +1,29 @@
 $(document).ready(function () {
+
+    function clearUrl(string) {
+        let urlParts = window.location.href.split("/");
+        if (urlParts.length <= 4) {
+            urlParts.push("Gost");
+        }
+        else {
+            while (urlParts.length >= 5) {
+                urlParts.pop();
+            }
+        }
+        urlParts.push(string);
+        return urlParts.join("/");
+    }
+
     $("#porukaMajstor").on("click", function () {
         // get sender id from server (session)
         let urlParts = window.location.href.split("/");
         let IdTo = urlParts[urlParts.length - 1];
-        for (let i = 0; i < 8; i++) {
-            urlParts.pop();
-        }
-        urlParts.push("getAuthorSession"); // push method
-        let newUrl = urlParts.join("/"); // create url
-
+        // for (let i = 0; i < 8; i++) {
+            // urlParts.pop();
+        // }
+        // urlParts.push("getAuthorSession"); // push method
+        // let newUrl = urlParts.join("/"); // create url
+        let newUrl = clearUrl("getAuthorSession");
         // AJAX req
         $.ajax({
             url: newUrl,
@@ -18,11 +33,12 @@ $(document).ready(function () {
                 let author = jsonResponse;
                 let IdFrom = author.IdKor;
 
-                urlParts.pop(); // pop method
-                urlParts.pop(); // pop controller
-                urlParts.push("Chat"); // push controller
-                urlParts.push("showChatting?IdFrom=" + IdFrom + "&IdTo=" + IdTo); // push method with parameters
-                newUrl = urlParts.join('/'); // create url
+                let urlPartsa = newUrl.split("/");
+                urlPartsa.pop(); // pop method
+                urlPartsa.pop(); // pop controller
+                urlPartsa.push("Chat"); // push controller
+                urlPartsa.push("showChatting?IdFrom=" + IdFrom + "&IdTo=" + IdTo); // push method with parameters
+                newUrl = urlPartsa.join('/'); // create url
                 // go to new page
                 window.location.href = newUrl;
             },
