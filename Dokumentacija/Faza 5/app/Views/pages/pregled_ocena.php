@@ -10,8 +10,9 @@
                 <?php
                     $session = session();
                     $reviews = $session->get("reviewsResult");
+                    $finalString = "";
                     if (!empty($reviews)) {
-                        echo "<div class='alert alert-light' role='alert'>
+                        $finalString .= "<div class='alert alert-light' role='alert'>
                         <div class='row'>
                             <div class='col-sm-3 text-left'>
                                 <h3>Korisnik</h3>
@@ -30,13 +31,14 @@
                         }
                         $cnt++;
                         if ($review->Tekst != "") {
+                            $actuallyPrinted++;
                             $encName = rawurlencode($review->Ime);
                             $encSurname = rawurlencode($review->Prezime);
                             $encCity = rawurlencode($review->Naziv);
                             $encPhone = rawurlencode($review->Telefon);
                             $encMail = rawurlencode($review->MejlAdresa);
                             $encId = rawurlencode($review->IdKor);
-                            echo 
+                            $finalString .=
                                 "<div class='alert alert-light' role='alert'><div class='row'>" .
                                 "<div class='col-sm-3 text-left'>" . 
                                 anchor(
@@ -48,6 +50,13 @@
                                 "<div class='col-sm-9 text-left'>" . $review->Tekst . "</div>" .
                                 "</div>" . "</div>";   
                         }
+                    }
+                    if ($actuallyPrinted == 0) {
+                        echo "<div class='alert alert-danger text-center' role='alert'>
+                        <h3>Ovaj majstor nema nijednu tekstualnu recenziju.</h3>
+                        </div>";
+                    } else {
+                        echo $finalString;
                     }
                 ?>
             </div>
