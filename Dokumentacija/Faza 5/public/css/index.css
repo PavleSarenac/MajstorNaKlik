@@ -10,6 +10,10 @@ input.star {
     /* Hide the default radio button */
 }
 
+.alert {
+    word-wrap: break-word;
+}
+
 input.star+label::before {
     content: '\2605';
     /* Insert star symbol (☆) */
@@ -44,6 +48,11 @@ input.star:checked+label::before {
 
 .dropdown-item {
     color: yellow;
+}
+
+.majstorLink {
+    color: black;
+    text-decoration: none;
 }
 
 .majstorLink:link {

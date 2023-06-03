@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\RecenzijaModel;
 use App\Models\SpecijalnostiModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
@@ -117,6 +118,7 @@ abstract class BaseController extends Controller
      * majstorima koje je korisnik trazio.
      */
     public function search() {
+        $_SESSION["func"] = "search";
         $handyman = $this->request->getVar("handyman");
         $city = $this->request->getVar("city");
         $priceSort = $this->request->getVar("priceRadio");
@@ -126,6 +128,7 @@ abstract class BaseController extends Controller
         $specijalnostiModel = new SpecijalnostiModel();
         $searchResult = $specijalnostiModel->search($handyman, $city, $priceSort, $speedSort, $qualitySort);
         $this->session->set("lastSearchResult", $searchResult);
+        $this->session->set("searchRowNumber", 10);
 
         $this->show("pretraga_i_sortiranje", 
         [
@@ -135,8 +138,52 @@ abstract class BaseController extends Controller
 
     }
 
-    public function readHandymanReviews() {
-        $this->show("pregled_ocena", []);
+    public function readHandymanReviews($handymanId, $name, $surname, $specialty) {
+        $_SESSION["func"] = "reviews";
+        $recenzijaModel = new RecenzijaModel();
+        $reviews = $recenzijaModel->getReviews($handymanId);
+        $this->session->set("reviewsResult", $reviews);
+        $this->session->set("reviewsRowNumber", 10);
+
+        $this->show("pregled_ocena", [
+            "handymanName" => $name,
+            "handymanSurname" => $surname,
+            "handymanSpecialty" => $specialty
+        ]);
+    }
+
+    public function fetchNextResultsReviews() {
+        $rowNumber = (int)$this->session->get("reviewsRowNumber");
+        $remainingRows = count($this->session->get("reviewsResult")) - $rowNumber;
+        $currentBlock = array_slice($this->session->get("reviewsResult"), $rowNumber, 
+        $remainingRows >= 10 ? 10 : null);
+        $newResultBlock = "";
+
+        foreach ($currentBlock as $review) {
+            if ($review->Tekst != "") {
+                $encName = rawurlencode($review->Ime);
+                $encSurname = rawurlencode($review->Prezime);
+                $encCity = rawurlencode($review->Naziv);
+                $encPhone = rawurlencode($review->Telefon);
+                $encMail = rawurlencode($review->MejlAdresa);
+                $encId = rawurlencode($review->IdKor);
+
+                $newReview =
+                "<div class='alert alert-light' role='alert'><div class='row'>" .
+                "<div class='col-sm-3 text-left'>" . 
+                anchor(
+                    site_url($this->session->get("controller") . "/prikazProfilaKorisnika" .
+                    "/$encName/$encSurname/$encCity/$encPhone/$encMail/$encId"), 
+                    $review->Ime . " " . $review->Prezime,
+                    array('class' => 'majstorLink')) .
+                    "</div>" .
+                    "<div class='col-sm-9 text-left'>" . $review->Tekst . "</div>" .
+                    "</div>" . "</div>";
+                $newResultBlock .= $newReview;
+            }
+        }
+        $this->session->set("reviewsRowNumber", $rowNumber + 10);
+        return $newResultBlock;
     }
 
     /**
@@ -145,8 +192,13 @@ abstract class BaseController extends Controller
      */
     public function fetchNextResults() {
         $controller = $this->session->get("controller");
+        if (array_key_exists("func", $_SESSION)) {
+            if ($_SESSION["func"] == "reviews") {
+                return $this->fetchNextResultsReviews();
+            }
+        }
 
-        $rowNumber = (int)$this->request->getVar("rowNumber");
+        $rowNumber = (int)$this->session->get("searchRowNumber");
         $remainingRows = count($this->session->get("lastSearchResult")) - $rowNumber;
 
         $currentBlock = array_slice($this->session->get("lastSearchResult"), $rowNumber, 
@@ -172,6 +224,7 @@ abstract class BaseController extends Controller
                 array('class' => 'majstorLink')
             );
         }
+        $this->session->set("searchRowNumber", $rowNumber + 10);
         echo $newResultBlock;
     }
     

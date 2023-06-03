@@ -1,3 +1,4 @@
+<!-- Pavle Sarenac -->        
         <div class="row text-center">
             <div class="col">
                 <h1><strong>Ocenite majstora: </strong><?php echo $name . " " . $surname . " (" . $specialty . ")"?></h1>

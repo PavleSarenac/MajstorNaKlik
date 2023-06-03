@@ -1,4 +1,4 @@
-<!--Ljubica Majstorovic-->
+<!--Ljubica Majstorovic, Pavle Sarenac-->
         <div class="row text-center">
             <div class="col">
                 <h1><strong>Pregled profila majstora:</strong></h1>
@@ -81,21 +81,21 @@
                                 </button>" 
                             ) .
                             anchor(
-                                "$controller/readHandymanReviews",
+                                "$controller/readHandymanReviews/$encId/$encName/$encSurname/$encSpecialty",
                                 "<button class='btn btn-down btn-dark text-yellow btn-style'>
                                 Procitaj recenzije majstora
                                 </button>"
                             );
                     } else if ($controller == "Majstor" && $email == $session->get("tekuciMajstorPodaci")[0]->MejlAdresa) {
                         echo anchor(
-                            "$controller/readHandymanReviews",
+                            "$controller/readHandymanReviews/$encId/$encName/$encSurname/$encSpecialty",
                             "<button class='btn btn-down btn-dark text-yellow btn-style'>
                             Procitaj svoje recenzije
                             </button>"
                         );
                     } else {
                         echo anchor(
-                            "$controller/readHandymanReviews",
+                            "$controller/readHandymanReviews/$encId/$encName/$encSurname/$encSpecialty",
                             "<button class='btn btn-down btn-dark text-yellow btn-style'>
                             Procitaj recenzije majstora
                             </button>"

@@ -57,22 +57,19 @@ $(document).ready(function () {
         $("#criteriaQuality").prop("checked", false);
     });
 
-    rowNumber = 10;
     function loadNextBatchOfResults() {
+        let urlParts = window.location.href.split("/");
+        let newUrl = "http://localhost:8080/" + urlParts[3] + "/fetchNextResults";
         $.ajax({
-            url: "fetchNextResults",
-            data: {
-                rowNumber: rowNumber
-            },
+            url: newUrl,
             success: function (result) {
                 $("#searchResultsContainer").append(result);
-                rowNumber += 10;
             }
         });
     }
 
     $(window).scroll(function () {
-        if ($(document).height() - $(this).height() <= $(this).scrollTop()) {
+        if ($(document).height() - $(this).height() <= $(this).scrollTop() + 50) {
             loadNextBatchOfResults();
         };
     });

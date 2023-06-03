@@ -44,6 +44,18 @@ class RecenzijaModel extends Model
         }
     }
 
+    public function getReviews($handymanId) {
+        $db = \Config\Database::connect();
+        $builder = $db->table("recenzija");
+        return $builder
+        ->select("*")
+        ->where("recenzija.IdMaj", $handymanId)
+        ->join("registrovani_korisnik", "recenzija.IdKli = registrovani_korisnik.IdKor")
+        ->join("grad", "registrovani_korisnik.IdGra = grad.IdGra")
+        ->join("telefon", "registrovani_korisnik.IdKor = telefon.IdKor")
+        ->get()->getResult();
+    }
+
 }
 
 ?>

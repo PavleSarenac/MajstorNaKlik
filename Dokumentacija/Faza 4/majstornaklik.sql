@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 01, 2023 at 07:24 PM
+-- Generation Time: Jun 03, 2023 at 05:30 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -94,21 +94,21 @@ CREATE TABLE IF NOT EXISTS `majstor` (
 --
 
 INSERT INTO `majstor` (`IdMaj`, `BrojRecenzija`, `ProsecnaCena`, `ProsecnaBrzina`, `ProsecanKvalitet`, `IdSpec`) VALUES
-(26, 3, '4.00', '3.67', '4.00', 67),
+(26, 4, '3.75', '3.75', '3.50', 67),
 (27, 3, '3.33', '3.67', '3.33', 90),
 (28, 4, '4.50', '4.25', '4.25', 73),
-(29, 3, '4.00', '3.67', '3.33', 30),
-(30, 3, '4.00', '3.67', '3.33', 81),
+(29, 13, '4.70', '4.46', '4.62', 30),
+(30, 4, '4.25', '3.50', '2.75', 81),
 (31, 3, '2.33', '1.67', '1.67', 70),
-(32, 3, '3.33', '3.67', '3.67', 21),
-(33, 3, '3.67', '4.00', '3.67', 57),
-(34, 3, '3.00', '4.33', '4.33', 82),
+(32, 4, '3.00', '3.75', '3.25', 21),
+(33, 4, '3.25', '4.00', '3.25', 57),
+(34, 4, '3.00', '4.00', '3.50', 82),
 (35, 3, '5.00', '4.67', '5.00', 33),
-(36, 3, '2.67', '3.00', '2.33', 17),
+(36, 4, '3.25', '3.25', '3.00', 17),
 (37, 3, '3.33', '2.00', '3.00', 58),
 (38, 3, '2.33', '2.33', '2.67', 52),
-(39, NULL, NULL, NULL, NULL, 29),
-(40, NULL, NULL, NULL, NULL, 53),
+(39, 1, '3.00', '2.00', '2.00', 29),
+(40, 1, '5.00', '5.00', '5.00', 53),
 (41, NULL, NULL, NULL, NULL, 81),
 (42, NULL, NULL, NULL, NULL, 73),
 (49, NULL, NULL, NULL, NULL, 29);
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `poruka` (
   PRIMARY KEY (`IdP`),
   KEY `IdMaj` (`IdPos`,`IdPri`),
   KEY `IdKli` (`IdPri`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `poruka`
@@ -147,7 +147,8 @@ INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) 
 (8, 'aa', '2023-06-01 14:10:33', 47, 32, 'pos'),
 (9, 's', '2023-06-01 14:10:57', 47, 32, 'pos'),
 (10, 'a', '2023-06-01 14:10:59', 47, 32, 'pos'),
-(11, 'ddd', '2023-06-01 14:11:03', 47, 32, 'pos');
+(11, 'ddd', '2023-06-01 14:11:03', 47, 32, 'pos'),
+(12, 'hhhh', '2023-06-01 21:40:48', 43, 30, 'pos');
 
 -- --------------------------------------------------------
 
@@ -187,7 +188,17 @@ CREATE TABLE IF NOT EXISTS `recenzija` (
 --
 
 INSERT INTO `recenzija` (`IdKli`, `IdMaj`, `Tekst`, `DatumVreme`) VALUES
+(43, 26, '', '2023-06-01 21:29:59'),
 (43, 28, 'Sve pohvale. Svaka cast. Bravo. Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.Bravo.', '2023-06-01 21:23:57'),
+(43, 29, '', '2023-06-01 21:35:52'),
+(43, 30, '', '2023-06-01 21:33:49'),
+(43, 32, 'NE zna nista.\r\n', '2023-06-01 21:35:25'),
+(43, 33, '', '2023-06-02 00:03:22'),
+(43, 34, '', '2023-06-01 21:42:19'),
+(43, 36, '', '2023-06-02 00:00:29'),
+(43, 39, '', '2023-06-02 00:03:31'),
+(43, 40, '', '2023-06-02 00:14:08'),
+(44, 29, '', '2023-06-02 00:46:07'),
 (45, 26, '', '2023-06-01 21:12:59'),
 (45, 27, '', '2023-06-01 21:13:06'),
 (45, 28, '', '2023-06-01 21:13:13'),
@@ -201,6 +212,7 @@ INSERT INTO `recenzija` (`IdKli`, `IdMaj`, `Tekst`, `DatumVreme`) VALUES
 (45, 36, '', '2023-06-01 21:15:06'),
 (45, 37, '', '2023-06-01 21:15:16'),
 (45, 38, '', '2023-06-01 21:15:24'),
+(46, 29, 'Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, bravo, svaka cast!Sjajno, brav', '2023-06-03 15:44:47'),
 (47, 26, 'sve pohvale', '2023-06-01 21:00:09'),
 (47, 27, '', '2023-06-01 21:04:24'),
 (47, 28, 'Pravi automehanicar. Radi svoj posao s ljubavlju. Sve preporuke.', '2023-06-01 21:03:48'),
@@ -226,7 +238,14 @@ INSERT INTO `recenzija` (`IdKli`, `IdMaj`, `Tekst`, `DatumVreme`) VALUES
 (48, 35, '', '2023-06-01 21:07:50'),
 (48, 36, '', '2023-06-01 21:07:59'),
 (48, 37, '', '2023-06-01 21:08:07'),
-(48, 38, '', '2023-06-01 21:08:15');
+(48, 38, '', '2023-06-01 21:08:15'),
+(50, 29, 'Najbolji je.', '2023-06-03 16:49:19'),
+(51, 29, 'bravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravo', '2023-06-03 16:50:13'),
+(52, 29, 'bbravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravooobravoooravooo', '2023-06-03 16:51:07'),
+(53, 29, '', '2023-06-03 16:51:48'),
+(54, 29, '', '2023-06-03 16:52:22'),
+(55, 29, '', '2023-06-03 19:00:30'),
+(56, 29, 'bravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravo', '2023-06-03 19:01:32');
 
 -- --------------------------------------------------------
 
@@ -250,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `registrovani_korisnik` (
   UNIQUE KEY `KorisnickoIme` (`KorisnickoIme`),
   KEY `IdGra` (`IdGra`),
   KEY `IdSli` (`IdSli`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `registrovani_korisnik`
@@ -283,7 +302,14 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (46, 'Olivera', 'Antić', 'majka@gmail.com', 'majka', 'majka123', 9, NULL, 'K'),
 (47, 'Igor', 'Šarenac', 'tata@gmail.com', 'tata', 'tata123', 25, NULL, 'K'),
 (48, 'Branko', 'Majstorović', 'branko@gmail.com', 'tast', 'tast123', 25, NULL, 'K'),
-(49, 'Miloš', 'Miladinović', 'losmi@gmail.com', 'losmi', 'losmi123', 24, NULL, 'M');
+(49, 'Miloš', 'Miladinović', 'losmi@gmail.com', 'losmi', 'losmi123', 24, NULL, 'M'),
+(50, 'test1', 'test1', 'test1@gmail.com', 'test1', 'test123', 27, NULL, 'K'),
+(51, 'test2', 'test2', 'test2@gmail.com', 'test2', 'test123', 27, NULL, 'K'),
+(52, 'test3', 'test3', 'test3@gmail.com', 'test3', 'test123', 17, NULL, 'K'),
+(53, 'test4', 'test4', 'test4@gmail.com', 'test4', 'test123', 18, NULL, 'K'),
+(54, 'test5', 'test5', 'test5@gmail.com', 'test5', 'test123', 21, NULL, 'K'),
+(55, 'test6', 'test6', 'test6@gmail.com', 'test6', 'test123', 23, NULL, 'K'),
+(56, 'test7', 'test7', 'test7@gmail.com', 'test7', 'test123', 22, NULL, 'K');
 
 -- --------------------------------------------------------
 
@@ -449,7 +475,14 @@ INSERT INTO `telefon` (`IdKor`, `Telefon`) VALUES
 (46, '+381-62-468-313'),
 (47, '+381-62-468-313'),
 (48, '+381-62-468-313'),
-(49, '+381-62-468-313');
+(49, '+381-62-468-313'),
+(50, '+381-62-468-313'),
+(51, '+381-62-468-313'),
+(52, '+381-62-468-313'),
+(53, '+381-62-468-313'),
+(54, '+381-62-468-313'),
+(55, '+381-62-468-313'),
+(56, '+381-62-468-313');
 
 -- --------------------------------------------------------
 
