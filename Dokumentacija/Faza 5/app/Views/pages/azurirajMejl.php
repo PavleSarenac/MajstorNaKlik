@@ -1,13 +1,12 @@
-<!--Ljubica Majstorovic-->
 <div class="row text-center">
-            <h1><strong>Ažuriraj telefon:</strong></h1>
+            <h1><strong>Ažuriraj mejl:</strong></h1>
         </div>
         <div class="row">
-            <form action="<?= site_url("$controller/submitPhone") ?>" method="post">
+            <form action="<?= site_url("$controller/submitMail") ?>" method="post">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col">
-                        <input type="text" name = "phone" class="form-control" placeholder="Unesite nov broj telefona..."  value ="<?= set_value("phone") ?>">
+                        <input type="text" name = "mail" class="form-control" placeholder="Unesite novi mejl..." value="<?= set_value("mail") ?>">
                     </div>
                     <div class="col"></div>
                 </div>
@@ -17,8 +16,8 @@
                         <button type="submit" class="btn btn-dark btn-down text-yellow">Ažuriraj</button>
                     </div>
                     <div class="col errorMessages">
-                    <?php if(!empty($errors['phone'])) 
-                            echo $errors['phone'];
+                    <?php if(!empty($errors['mail'])) 
+                            echo $errors['mail'];
                         ?>
                     </div>
                 </div>

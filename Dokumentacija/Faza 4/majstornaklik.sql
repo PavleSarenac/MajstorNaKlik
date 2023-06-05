@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 05, 2023 at 01:17 AM
+-- Generation Time: Jun 05, 2023 at 02:46 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `poruka` (
   PRIMARY KEY (`IdP`),
   KEY `IdMaj` (`IdPos`,`IdPri`),
   KEY `IdKli` (`IdPri`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `poruka`
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `poruka` (
 INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) VALUES
 (1, 'desi dulou', '2023-06-04 19:48:45', 32, 29, 2),
 (2, 'e evo buraz', '2023-06-04 19:51:39', 29, 32, 2),
-(3, 'desi boro', '2023-06-04 20:11:18', 57, 26, 0),
+(3, 'desi boro', '2023-06-04 20:11:18', 57, 26, 2),
 (4, 'sta ima, mozes li mi opraviti sporet?', '2023-06-05 00:47:11', 32, 29, 2),
 (5, 'mogu samo mi reci kad ti odgovara?', '2023-06-05 00:57:20', 29, 32, 2),
 (6, 'poruka', '2023-06-05 01:01:01', 47, 29, 2),
@@ -148,16 +148,110 @@ INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) 
 (9, 'poruka1', '2023-06-05 01:01:25', 43, 29, 2),
 (10, 'poruka1', '2023-06-05 01:01:27', 43, 29, 2),
 (11, 'poruka1', '2023-06-05 01:01:29', 43, 29, 2),
-(12, 'poruka2', '2023-06-05 01:01:51', 46, 29, 1),
-(13, 'poruka2', '2023-06-05 01:01:52', 46, 29, 1),
-(14, 'poruka2', '2023-06-05 01:01:54', 46, 29, 1),
+(12, 'poruka2', '2023-06-05 01:01:51', 46, 29, 2),
+(13, 'poruka2', '2023-06-05 01:01:52', 46, 29, 2),
+(14, 'poruka2', '2023-06-05 01:01:54', 46, 29, 2),
 (15, 'poruka3', '2023-06-05 01:03:06', 45, 29, 2),
 (16, 'poruka3', '2023-06-05 01:03:08', 45, 29, 2),
 (17, 'poruka3', '2023-06-05 01:03:10', 45, 29, 2),
 (18, 'desi fico', '2023-06-05 01:04:38', 29, 43, 0),
-(19, 'proba', '2023-06-05 01:11:31', 29, 32, 0),
-(20, 'proba', '2023-06-05 01:14:20', 29, 47, 0),
-(21, 'proba', '2023-06-05 03:14:23', 29, 43, 0);
+(19, 'proba', '2023-06-05 01:11:31', 29, 32, 2),
+(20, 'proba', '2023-06-05 01:14:20', 29, 47, 2),
+(21, 'proba', '2023-06-05 03:14:23', 29, 43, 0),
+(22, 'de si juda', '2023-06-05 09:27:41', 47, 32, 2),
+(23, 'sta se radi', '2023-06-05 09:27:44', 47, 32, 2),
+(24, 'jel ide spremanje ispita', '2023-06-05 09:27:47', 47, 32, 2),
+(25, 'jel sve ok', '2023-06-05 09:27:51', 47, 32, 2),
+(26, 'cao judaa', '2023-06-05 09:28:10', 29, 32, 2),
+(27, 'ako se ne uozbiljis izbacujem te iz sistema', '2023-06-05 09:28:38', 16, 32, 2),
+(28, 'ee', '2023-06-05 09:29:08', 41, 32, 2),
+(29, 'ee', '2023-06-05 09:29:32', 37, 32, 2),
+(30, 'ee', '2023-06-05 09:29:47', 35, 32, 2),
+(31, 'eee', '2023-06-05 09:30:06', 36, 32, 2),
+(32, 'ee', '2023-06-05 09:33:50', 32, 35, 0),
+(33, 'vazi', '2023-06-05 09:38:14', 32, 16, 2),
+(34, 'afkasofas', '2023-06-05 09:41:09', 16, 29, 2),
+(35, 'fas', '2023-06-05 09:41:10', 16, 29, 2),
+(36, 'as', '2023-06-05 09:41:11', 16, 29, 2),
+(37, 'asf', '2023-06-05 09:41:11', 16, 29, 2),
+(38, 'asf', '2023-06-05 09:41:12', 16, 29, 2),
+(39, 'asf', '2023-06-05 09:41:13', 16, 29, 2),
+(40, 's', '2023-06-05 09:41:13', 16, 29, 2),
+(41, 'fa', '2023-06-05 09:41:14', 16, 29, 2),
+(42, 'fa', '2023-06-05 09:41:15', 16, 29, 2),
+(43, 'hgasfhasfjkhsafjhksfjak', '2023-06-05 09:41:35', 47, 29, 2),
+(44, 'hgksafhkgasfhghgasf', '2023-06-05 09:41:36', 47, 29, 2),
+(45, 'hhasfghasfhgsafhj', '2023-06-05 09:41:37', 47, 29, 2),
+(46, 'asfhhkgsafhgksa', '2023-06-05 09:41:39', 47, 29, 2),
+(47, 'hgkafhgsafhgkashg', '2023-06-05 09:41:40', 47, 29, 2),
+(48, 'gkhasfhkgasgfhkafs', '2023-06-05 09:41:41', 47, 29, 2),
+(49, 'safghghasghkasf', '2023-06-05 09:41:42', 47, 29, 2),
+(50, 'afssafsaf', '2023-06-05 09:41:55', 44, 29, 2),
+(51, 'asfasf', '2023-06-05 09:41:55', 44, 29, 2),
+(52, 'asf', '2023-06-05 09:41:56', 44, 29, 2),
+(53, 'saf', '2023-06-05 09:41:56', 44, 29, 2),
+(54, 'asf', '2023-06-05 09:41:56', 44, 29, 2),
+(55, 'sa', '2023-06-05 09:41:56', 44, 29, 2),
+(56, 'fsa', '2023-06-05 09:41:57', 44, 29, 2),
+(57, 'saf', '2023-06-05 09:41:57', 44, 29, 2),
+(58, 'asf', '2023-06-05 09:41:57', 44, 29, 2),
+(59, 'asf', '2023-06-05 09:41:58', 44, 29, 2),
+(60, 'asf', '2023-06-05 09:41:58', 44, 29, 2),
+(61, 'asf', '2023-06-05 09:41:58', 44, 29, 2),
+(62, 'a', '2023-06-05 09:41:58', 44, 29, 2),
+(63, 'af', '2023-06-05 09:41:59', 44, 29, 2),
+(64, 'aga', '2023-06-05 09:42:41', 29, 43, 0),
+(65, 'sekulaa', '2023-06-05 09:53:37', 47, 36, 2),
+(66, 'as', '2023-06-05 09:53:38', 47, 36, 2),
+(67, 'saf', '2023-06-05 09:53:38', 47, 36, 2),
+(68, 'asf', '2023-06-05 09:53:39', 47, 36, 2),
+(69, 'asf', '2023-06-05 09:53:39', 47, 36, 2),
+(70, 'asf', '2023-06-05 09:53:40', 47, 36, 2),
+(71, 'f', '2023-06-05 09:53:40', 47, 36, 2),
+(72, 'fas', '2023-06-05 09:53:41', 47, 36, 2),
+(73, 'fas', '2023-06-05 09:53:42', 47, 36, 2),
+(74, 'as', '2023-06-05 09:53:42', 47, 36, 2),
+(75, 'asfa', '2023-06-05 09:53:42', 47, 36, 2),
+(76, 'as', '2023-06-05 09:53:43', 47, 36, 2),
+(77, 'sfa', '2023-06-05 09:53:43', 47, 36, 2),
+(78, 'saf', '2023-06-05 09:53:44', 47, 36, 2),
+(79, 'asf', '2023-06-05 09:53:44', 47, 36, 2),
+(80, 's', '2023-06-05 09:53:45', 47, 36, 2),
+(81, 'sfa', '2023-06-05 09:53:45', 47, 36, 2),
+(82, 'fa', '2023-06-05 09:53:46', 47, 36, 2),
+(83, 'fsa', '2023-06-05 09:53:46', 47, 36, 2),
+(84, 'saf', '2023-06-05 09:53:46', 47, 36, 2),
+(85, 'asf', '2023-06-05 09:53:47', 47, 36, 2),
+(86, 'sf', '2023-06-05 09:53:47', 47, 36, 2),
+(87, 'saf', '2023-06-05 09:53:48', 47, 36, 2),
+(88, 'f', '2023-06-05 09:53:48', 47, 36, 2),
+(89, 's', '2023-06-05 09:53:49', 47, 36, 2),
+(90, 'f', '2023-06-05 09:53:49', 47, 36, 2),
+(91, 'sa', '2023-06-05 09:53:49', 47, 36, 2),
+(92, 'sa', '2023-06-05 09:53:50', 47, 36, 2),
+(93, 'f', '2023-06-05 09:53:50', 47, 36, 2),
+(94, 'fsa', '2023-06-05 09:53:51', 47, 36, 2),
+(95, 'as', '2023-06-05 09:53:51', 47, 36, 2),
+(96, 'f', '2023-06-05 09:53:51', 47, 36, 2),
+(97, 'sfas', '2023-06-05 09:53:52', 47, 36, 2),
+(98, 'af', '2023-06-05 09:53:52', 47, 36, 2),
+(99, 'fas', '2023-06-05 09:53:53', 47, 36, 2),
+(100, 'fas', '2023-06-05 09:53:53', 47, 36, 2),
+(101, 'f', '2023-06-05 09:53:53', 47, 36, 2),
+(102, 'as', '2023-06-05 09:53:54', 47, 36, 2),
+(103, 'f', '2023-06-05 09:53:54', 47, 36, 2),
+(104, 'f', '2023-06-05 09:53:55', 47, 36, 2),
+(105, 'sa', '2023-06-05 09:53:55', 47, 36, 2),
+(106, 'as', '2023-06-05 09:53:55', 47, 36, 2),
+(107, 'fa', '2023-06-05 09:53:56', 47, 36, 2),
+(108, 'fasfasfasfa', '2023-06-05 15:57:52', 16, 47, 2),
+(109, 'ako se ne uozbiljis', '2023-06-05 15:57:59', 16, 47, 2),
+(110, 'izbacujem te', '2023-06-05 15:58:02', 16, 47, 2),
+(111, 'trajno', '2023-06-05 15:58:03', 16, 47, 2),
+(112, 'iz ', '2023-06-05 15:58:04', 16, 47, 2),
+(113, 'sistema', '2023-06-05 15:58:08', 16, 47, 2),
+(114, 'jel jasno', '2023-06-05 15:58:10', 16, 47, 2),
+(115, 'sto te prijavljuje igor onoliko', '2023-06-05 16:11:37', 16, 29, 2);
 
 -- --------------------------------------------------------
 
@@ -167,14 +261,33 @@ INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) 
 
 DROP TABLE IF EXISTS `prijava`;
 CREATE TABLE IF NOT EXISTS `prijava` (
-  `IdMaj` int NOT NULL,
+  `IdPri` int NOT NULL AUTO_INCREMENT,
   `IdKli` int NOT NULL,
   `IdPrijavljenog` int NOT NULL,
   `Tekst` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
   `DatumVreme` datetime NOT NULL,
-  PRIMARY KEY (`IdMaj`,`IdKli`),
-  KEY `IdKli` (`IdKli`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  PRIMARY KEY (`IdPri`),
+  KEY `IdKli` (`IdKli`),
+  KEY `prijava_ibfk_3` (`IdPrijavljenog`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `prijava`
+--
+
+INSERT INTO `prijava` (`IdPri`, `IdKli`, `IdPrijavljenog`, `Tekst`, `DatumVreme`) VALUES
+(1, 47, 29, 'los', '2023-06-05 15:20:04'),
+(2, 47, 29, 'eafe', '2023-06-05 15:22:25'),
+(3, 47, 29, 'fsasaas', '2023-06-05 15:22:29'),
+(4, 47, 29, 'fasassfsafasafsfasassfsafasafsfasassfsafasafsfasassfsafasafsfasassfsafasafsfasassfsafasafsfasassfsaf', '2023-06-05 15:22:37'),
+(5, 47, 29, 'fasfasfsasfa', '2023-06-05 15:22:42'),
+(6, 47, 29, 'fsafsafsasaf', '2023-06-05 15:22:46'),
+(7, 47, 29, 'afssfafsafsafsaasfasf', '2023-06-05 15:22:50'),
+(8, 47, 29, 'fsaasfsafsafsfa', '2023-06-05 15:22:54'),
+(9, 47, 29, 'sfaasfasffasasf', '2023-06-05 15:22:58'),
+(10, 47, 29, 'fasfsafsasaf', '2023-06-05 15:29:00'),
+(11, 47, 29, 'fsafasasfsfa', '2023-06-05 15:29:04'),
+(12, 47, 29, 'asfsafsaf', '2023-06-05 15:29:08');
 
 -- --------------------------------------------------------
 
@@ -279,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `registrovani_korisnik` (
   UNIQUE KEY `KorisnickoIme` (`KorisnickoIme`),
   KEY `IdGra` (`IdGra`),
   KEY `IdSli` (`IdSli`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `registrovani_korisnik`
@@ -289,7 +402,7 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (16, 'Ljubica', 'Majstorović', 'ljubmajstorovic9@gmail.com', 'ljups', 'ljups123', 35, NULL, 'A'),
 (17, 'Nikola', 'Nikolić', 'posta.nikolan@gmail.com', 'dzon', 'dzon123', 9, NULL, 'A'),
 (18, 'Pavle', 'Šarenac', 'sarenac.pavle@gmail.com', 'pajo', 'pajo123', 9, NULL, 'A'),
-(26, 'Boris', 'Tončić', 'boki@gmail.com', 'boki', 'boki123', 24, NULL, 'M'),
+(26, 'Boris', 'Tončić', 'boki@gmail.com', 'boki', 'boki123', 24, 3, 'M'),
 (27, 'Dušan', 'Cvetković', 'duki@gmail.com', 'duki', 'duki123', 28, NULL, 'M'),
 (28, 'Vladimir', 'Aleksić', 'vlajko@gmail.com', 'vlajko', 'vlajko123', 9, NULL, 'M'),
 (29, 'Dušan', 'Pešić', 'pesou@gmail.com', 'pesou', 'pesou123', 19, NULL, 'M'),
@@ -310,7 +423,7 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (44, 'Irina', 'Majstorović', 'rinka@gmail.com', 'rinka', 'rinka123', 35, NULL, 'K'),
 (45, 'Nataša', 'Majstorović', 'tasta@gmail.com', 'tasta', 'tasta123', 16, NULL, 'K'),
 (46, 'Olivera', 'Antić', 'majka@gmail.com', 'majka', 'majka123', 9, NULL, 'K'),
-(47, 'Igor', 'Šarenac', 'tata@gmail.com', 'tata', 'tata123', 25, NULL, 'K'),
+(47, 'Igor', 'Šarenac', 'tataa@gmail.com', 'tata', 'tata123', 25, 1, 'K'),
 (48, 'Branko', 'Majstorović', 'branko@gmail.com', 'tast', 'tast123', 25, NULL, 'K'),
 (49, 'Miloš', 'Miladinović', 'losmi@gmail.com', 'losmi', 'losmi123', 24, NULL, 'M'),
 (50, 'test1', 'test1', 'test1@gmail.com', 'test1', 'test123', 27, NULL, 'K'),
@@ -320,7 +433,8 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (54, 'test5', 'test5', 'test5@gmail.com', 'test5', 'test123', 21, NULL, 'K'),
 (55, 'test6', 'test6', 'test6@gmail.com', 'test6', 'test123', 23, NULL, 'K'),
 (56, 'test7', 'test7', 'test7@gmail.com', 'test7', 'test123', 22, NULL, 'K'),
-(57, 'Zoran', 'Riboskic', 'zoki@gmail.com', 'zoki', 'zoki123', 9, NULL, 'K');
+(57, 'Zoran', 'Riboskic', 'zoki@gmail.com', 'zoki', 'zoki123', 9, NULL, 'K'),
+(58, 'test10', 'test10', 'test10@gmail.com', 'test10', 'test123', 25, NULL, 'K');
 
 -- --------------------------------------------------------
 
@@ -331,13 +445,18 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 DROP TABLE IF EXISTS `slika`;
 CREATE TABLE IF NOT EXISTS `slika` (
   `IdSli` int NOT NULL AUTO_INCREMENT,
-  `ImgData` longblob NOT NULL,
-  `TipSlike` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
-  `ImeSlike` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci DEFAULT NULL,
-  `Velicina` int NOT NULL DEFAULT '0',
-  `DatumIzmene` datetime NOT NULL,
+  `Path` varchar(200) COLLATE utf8mb3_unicode_ci NOT NULL,
   PRIMARY KEY (`IdSli`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `slika`
+--
+
+INSERT INTO `slika` (`IdSli`, `Path`) VALUES
+(1, 'uploads/1685972443_5e89d95c2df4b69d7835.jpeg'),
+(2, 'uploads/1685973153_1552b30357e4e67a74eb.png'),
+(3, 'uploads/1685973317_29298136ce546afc233a.jpeg');
 
 -- --------------------------------------------------------
 
@@ -464,37 +583,38 @@ CREATE TABLE IF NOT EXISTS `telefon` (
 
 INSERT INTO `telefon` (`IdKor`, `Telefon`) VALUES
 (26, '+381-62-468-313'),
-(27, '+381-62-468-313'),
-(28, '+381-62-468-313'),
-(29, '+381-62-468-313'),
-(30, '+381-62-468-313'),
-(31, '+381-62-468-313'),
-(32, '+381-62-468-313'),
-(33, '+381-62-468-313'),
-(34, '+381-62-468-313'),
-(35, '+381-62-468-313'),
-(36, '+381-62-468-313'),
-(37, '+381-62-468-313'),
-(38, '+381-62-468-313'),
-(39, '+381-62-468-313'),
-(40, '+381-62-468-313'),
-(41, '+381-62-468-313'),
-(42, '+381-62-468-313'),
-(43, '+381-62-468-313'),
-(44, '+381-62-468-313'),
-(45, '+381-62-468-313'),
-(46, '+381-62-468-313'),
-(47, '+381-62-468-313'),
-(48, '+381-62-468-313'),
-(49, '+381-62-468-313'),
-(50, '+381-62-468-313'),
-(51, '+381-62-468-313'),
-(52, '+381-62-468-313'),
-(53, '+381-62-468-313'),
-(54, '+381-62-468-313'),
-(55, '+381-62-468-313'),
-(56, '+381-62-468-313'),
-(57, '+381-65-956-292');
+(27, '+381-62-468-314'),
+(28, '+381-62-468-315'),
+(29, '+381-62-468-316'),
+(30, '+381-62-468-317'),
+(31, '+381-62-468-318'),
+(32, '+381-62-468-319'),
+(33, '+381-62-468-320'),
+(34, '+381-62-468-321'),
+(35, '+381-62-468-322'),
+(36, '+381-62-468-323'),
+(37, '+381-62-468-324'),
+(38, '+381-62-468-325'),
+(39, '+381-62-468-326'),
+(40, '+381-62-468-327'),
+(41, '+381-62-468-328'),
+(42, '+381-62-468-329'),
+(43, '+381-62-468-330'),
+(44, '+381-62-468-331'),
+(45, '+381-62-468-332'),
+(46, '+381-62-468-333'),
+(47, '+381-62-468-334'),
+(48, '+381-62-468-335'),
+(49, '+381-62-468-336'),
+(50, '+381-62-468-337'),
+(51, '+381-62-468-338'),
+(52, '+381-62-468-339'),
+(53, '+381-62-468-340'),
+(54, '+381-62-468-341'),
+(55, '+381-62-468-342'),
+(56, '+381-62-468-343'),
+(57, '+381-65-956-344'),
+(58, '+381-62-468-345');
 
 -- --------------------------------------------------------
 
@@ -509,6 +629,13 @@ CREATE TABLE IF NOT EXISTS `zabranjeni_mejlovi` (
   PRIMARY KEY (`MejlAdresa`),
   KEY `KorisnickoIme` (`IdAdm`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Dumping data for table `zabranjeni_mejlovi`
+--
+
+INSERT INTO `zabranjeni_mejlovi` (`MejlAdresa`, `IdAdm`) VALUES
+('majstorZaIzbacivanje@gmail.com', 16);
 
 --
 -- Constraints for dumped tables
@@ -532,8 +659,8 @@ ALTER TABLE `poruka`
 -- Constraints for table `prijava`
 --
 ALTER TABLE `prijava`
-  ADD CONSTRAINT `prijava_ibfk_1` FOREIGN KEY (`IdMaj`) REFERENCES `majstor` (`IdMaj`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `prijava_ibfk_2` FOREIGN KEY (`IdKli`) REFERENCES `registrovani_korisnik` (`IdKor`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `prijava_ibfk_2` FOREIGN KEY (`IdKli`) REFERENCES `registrovani_korisnik` (`IdKor`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `prijava_ibfk_3` FOREIGN KEY (`IdPrijavljenog`) REFERENCES `majstor` (`IdMaj`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `recenzija`

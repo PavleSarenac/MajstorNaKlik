@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\RecenzijaModel;
 use App\Models\SpecijalnostiModel;
 use App\Models\RegistrovaniKorisnikModel;
+use App\Models\SlikaModel;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -81,6 +82,14 @@ abstract class BaseController extends Controller
      * @return void
      */
     public function prikazProfilaMajstora($name, $surname, $specialty, $city, $phone, $email, $id) {
+        $regModel = new RegistrovaniKorisnikModel();
+        $slikaModel = new SlikaModel();
+        $idSlike = $regModel->where("IdKor", $id)->findAll();
+        $idSlike = $idSlike[0]->IdSli;
+        $path = $slikaModel->where("IdSli", $idSlike)->findAll();
+        if($path != null){
+            $path = $path[0]->Path;
+        }
         $this->show("majstorInfo", [
             "name" => $name,
             "surname" => $surname,
@@ -88,17 +97,39 @@ abstract class BaseController extends Controller
             "city" => $city,
             "phone" => $phone,
             "email" => $email,
+            "path" => $path,
             "id" => $id
         ]);
     }
 
+
+    /**
+     * Ova funkcija sluzi za prikaz profila korisnika.
+     * 
+     * @param string $name Name
+     * @param string $surname Surname
+     * @param string $city City
+     * @param string $phone Phone
+     * @param string $email Email
+     * 
+     * @return void
+     */
     public function prikazProfilaKorisnika($name, $surname, $city, $phone, $email, $id) {
+        $regModel = new RegistrovaniKorisnikModel();
+        $slikaModel = new SlikaModel();
+        $idSlike = $regModel->where("IdKor", $id)->findAll();
+        $idSlike = $idSlike[0]->IdSli;
+        $path = $slikaModel->where("IdSli", $idSlike)->findAll();
+        if($path != null){
+            $path = $path[0]->Path;
+        }
         $this->show("korisnikInfo", [
             "name" => $name,
             "surname" => $surname,
             "city" => $city,
             "phone" => $phone,
             "email" => $email,
+            "path" => $path,
             "id" => $id
         ]);
     }
@@ -137,6 +168,22 @@ abstract class BaseController extends Controller
             "searchCity" => $city,
         ]);
 
+    }
+
+    /**
+     * Ova funkcija je redefinisana u klasi Administrator, sluzi za ucitavanje novih prijava u browser
+     */
+
+     public function fetchNextResultsReports(){
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
+    }
+
+    /**
+     * Ova funkcija je redefinisana u klasi Administrator, sluzi za ucitavanje novih prijava odredjenog majstora u browser
+     */
+
+    public function fetchNextResultsHandymanReports(){
+        throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 
     public function readHandymanReviews($handymanId, $name, $surname, $specialty) {
@@ -197,6 +244,13 @@ abstract class BaseController extends Controller
             if ($_SESSION["func"] == "reviews") {
                 return $this->fetchNextResultsReviews();
             }
+            if ($_SESSION["func"] == "reports") {
+                return $this->fetchNextResultsReports();
+            }
+            if ($_SESSION["func"] == "handymanReports") {
+        
+                return $this->fetchNextResultsHandymanReports();
+            }
         }
 
         $rowNumber = (int)$this->session->get("searchRowNumber");
@@ -256,7 +310,5 @@ abstract class BaseController extends Controller
         if($korisnik)$korisnik = $korisnik[0];
         echo json_encode($korisnik->KorisnickoIme);
     }
-
-
 
 }

@@ -14,9 +14,9 @@
             <!-- More messages can be added here -->
         </div>
         <div class="input-box">
-            <input type="text" id="message-input-chat" placeholder="Type your message...">
+            <input type="text" id="message-input-chat" placeholder="Unesite Vašu poruku...">
             <div class="col-sm-1">
-                <button class="btn btn-dark text-yellow" id="send-button-chat">Send</button>
+                <button class="btn btn-dark text-yellow" id="send-button-chat">Pošalji</button>
             </div>
         </div>
     </div>

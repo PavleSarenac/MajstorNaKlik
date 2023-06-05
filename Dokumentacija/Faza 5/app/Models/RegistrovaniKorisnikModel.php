@@ -77,4 +77,105 @@ class RegistrovaniKorisnikModel extends Model {
     public function getUsernameFromId($id){
         return $this->where("IdKor", $id)->findAll();
     }
+
+
+    /**
+     * Upisuje novu sifru za zadatog korisnika u bazu
+     * 
+     * @param integer $IdKor IdKor
+     * 
+     * @param integer $pass Pass
+     * 
+     * @return void
+     * 
+     * 
+     */
+
+     public function updatePassword($IdKor, $pass){
+        $this->update($IdKor, [
+            "Lozinka" => $pass
+        ]);
+    }
+
+    /**
+     * Upisuje putanju do nove slike za zadatog korisnika u bazu
+     * 
+     * @param integer $IdKor IdKor
+     * 
+     * @param string $IdPho IdPho
+     * 
+     * @return void
+     * 
+     * 
+     */
+
+    public function updatePhoto($IdKor, $IdPho){
+
+        
+        
+        $this->update($IdKor, [
+            "IdSli" => $IdPho
+        ]);
+    }
+
+
+    /**
+     * Upisuje novi grad za zadatog korisnika u bazu
+     * 
+     * @param integer $IdKor IdKor
+     * 
+     * @param string $city City
+     * 
+     * @return void
+     * 
+     * 
+     */
+    
+    public function updateCity($IdKor, $city){
+        $gradModel = new GradModel();
+        $idG = $gradModel->searchId($city);
+        $this->update($IdKor, [
+            "IdGra" => $idG
+        ]);
+
+    }
+
+
+    /**
+     * Upisuje novi mejl za zadatog korisnika u bazu
+     * 
+     * @param integer $IdKor IdKor
+     * 
+     * @param string $mail Mail
+     * 
+     * @return void
+     * 
+     * 
+     */
+
+    public function updateMail($IdKor, $mail){
+        $this->update($IdKor, [
+            "MejlAdresa" => $mail
+        ]);
+
+    }
+
+
+
+    /**
+     * Pronalazi id slike zadatog korisnika
+     * 
+     * @param integer $IdKor IdKor
+     * 
+     * @return integer
+     * 
+     *
+     */
+
+
+    public function getIdPic($IdKor){
+        $result = $this->where("IdKor", $IdKor)->find();
+        if($result == null) return null;
+        return $result[0]->IdSli;
+    }
 }

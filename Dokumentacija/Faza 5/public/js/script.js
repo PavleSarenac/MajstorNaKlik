@@ -69,7 +69,7 @@ $(document).ready(function () {
     }
 
     $(window).scroll(function () {
-        if ($(document).height() - $(this).height() <= $(this).scrollTop() + 50) {
+        if ($(document).height() - $(this).height() <= $(this).scrollTop() + 100) {
             loadNextBatchOfResults();
         };
     });

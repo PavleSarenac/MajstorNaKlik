@@ -3,40 +3,66 @@
             <h1><strong>Ažuriraj svoj profil:</strong></h1>
         </div>
         <div class="row">
-            <form action="">
-                <div class="row">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <?php
+                    echo anchor(
+                        "$controller/azurirajLozinku",
+                        '<button class= "btn btn-side btn-dark text-yellow btn-style">Azuriraj lozinku</button>'
+                    );
+                    ?>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col text-center">
+                <?php
+                        echo anchor(
+                            "$controller/azurirajTelefon",
+                            '<button class= "btn btn-side btn-dark text-yellow btn-style">Azuriraj telefon</button>'
+                        );
+                        ?>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <?php
+                        echo  anchor(
+                            "$controller/azurirajMejl",
+                            '<button class= "btn btn-side btn-dark text-yellow btn-style">Azuriraj mejl</button>'
+                        );
+                        ?>  
+                    </div>
+                <div class="col"></div>
+            </div>
+            <div class="row">
                     <div class="col"></div>
-                    <div class="col">
-                        <button type="button" class="btn btn-dark text-yellow" id="update-pass-btn">Ažuriraj
-                            lozinku</button>
+                    <div class="col text-center">
+                    <?php
+                        echo anchor(
+                            "$controller/azurirajLokaciju",
+                            '<button class= "btn btn-side btn-dark text-yellow btn-style">Azuriraj lokaciju</button>'
+                        );
+                        ?>
                     </div>
                     <div class="col"></div>
                 </div>
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col">
-                        <button type="button" class="btn btn-dark text-yellow" id="update-phone-btn">Ažuriraj
-                            telefon</button>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col text-center">
+                    <?php
+                        echo  anchor(
+                            "$controller/azurirajSliku",
+                            '<button class= "btn btn-side btn-dark text-yellow btn-style">Azuriraj sliku</button>'
+                        );
+                        ?>  
                     </div>
-                    <div class="col"></div>
-                </div>
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col">
-                        <button type="button" class="btn btn-dark text-yellow" id="update-city-btn">Ažuriraj
-                            lokaciju</button>
-                    </div>
-                    <div class="col"></div>
-                </div>
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col">
-                        <button type="button" class="btn btn-dark text-yellow" id="update-photo-btn">Ažuriraj profilnu
-                            sliku</button>
-                    </div>
-                    <div class="col"></div>
-                </div>
-            </form>
+                <div class="col"></div>
+            </div>
         </div>
     </div>
 </body>

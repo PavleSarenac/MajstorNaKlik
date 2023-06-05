@@ -239,18 +239,19 @@ class Gost extends BaseController
                     ]
                 ],
                 "phone" => [
-                    "rules" => "required|regex_match[/^\+381-6\d-\d{3}-\d{3,4}$/]",
+                    "rules" => "required|regex_match[/^\+381-6\d-\d{3}-\d{3,4}$/]|is_unique[telefon.Telefon]",
                     "errors" => [
                         "required" => "Obavezno je da unesete Vaš broj telefona.",
-                        "regex_match" => "Telefon mora biti u formatu +381-6x-xxx-xxx(x)."
+                        "regex_match" => "Telefon mora biti u formatu +381-6x-xxx-xxx(x).",
+                        "is_unique" => "Uneti telefon već postoji u bazi."
                     ]
                 ],
                 "mail" => [
-                    "rules" => "required|valid_email|is_unique[registrovani_korisnik.MejlAdresa]",
+                    "rules" => "required|valid_email|is_unique[registrovani_korisnik.MejlAdresa]|is_unique[zabranjeni_mejlovi.MejlAdresa]",
                     "errors" => [
                         "required" => "Obavezno je da unesete Vaš broj telefona.",
                         "valid_email" => "Uneta mejl adresa nije u dobrom formatu.",
-                        "is_unique" => "Već postoji nalog sa unetom mejl adresom."
+                        "is_unique" => "Uneti mejl je već u bazi."
                     ]
                 ]
             ]

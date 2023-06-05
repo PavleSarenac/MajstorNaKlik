@@ -1,67 +1,74 @@
 <!--Nikola Nikolic-->
-        <div class="row text-center">
-            <h1><strong>Sve prijave ovog majstora:</strong></h1>
+
+<div id="searchResultsContainer">
+            <?php
+            use App\Models\PrijavaModel;
+                $session = session();
+                $searchResult = $session->get("handymanReportsResult");
+                $majstor = $searchResult[0];
+                $majstor = $majstor->Ime. " " . $majstor->Prezime;
+
+                echo "<div class='row text-center'>
+                <h1><strong>Sve prijave za majstora pod imenom " . $majstor . "</strong></h1>
+                </div>";
+                echo "<div class='alert alert-light' role='alert'>
+                    <div class='row'>
+                        <div class='col text-center'>
+                            <h3>Datum i vreme prijave</h3>
+                        </div>
+                        <div class='col text-center'>
+                            <h3>Podneo prijavu</h3>
+                        </div>
+                        <div class='col text-center'>
+                            <h3>Opis prijave</h3>
+                        </div>
+                        
+                    </div>
+                    </div>";
+                $cnt = 0;
+                foreach ($searchResult as $result) {
+                    if ($cnt == 10) {
+                        break;
+                    }
+
+                    $cnt++;
+
+                    $prijavaModel= new PrijavaModel();
+                    $resultKlijent = $prijavaModel->searchReporter($result->IdKli);
+                    $resultKlijent = $resultKlijent[0];
+
+                    $encodedKName = rawurlencode($resultKlijent->Ime);
+                    $encodedKSurname = rawurlencode($resultKlijent->Prezime);
+                    $encodedKCity = rawurlencode($resultKlijent->Naziv);
+                    $encodedKPhone = urlencode($resultKlijent->Telefon);
+                    $encodedKMail = rawurlencode($resultKlijent->MejlAdresa);
+                    $idK = rawurlencode($resultKlijent->IdKor);
+                    
+                    $encodedName = rawurlencode($result->Ime);
+                    $encodedSurname = rawurlencode($result->Prezime);
+                    $encodedSpecialty = rawurlencode($result->Opis);
+                    $encodedCity = rawurlencode($result->Naziv);
+                    $encodedPhone = urlencode($result->Telefon);
+                    $encodedMail = rawurlencode($result->MejlAdresa);
+                    $id = rawurlencode($result->IdKor);
+                    
+                    echo "<div class='alert alert-light' role='alert'><div class='row' >" .
+                    "<div class='row'><div class='col text-center'>" . $result->DatumVreme ."</div><div class='col text-center'>". anchor(
+                        "$controller/prikazProfilaKorisnika/$encodedKName/$encodedKSurname/$encodedKCity/$encodedKPhone/$encodedKMail/$idK",
+                        $resultKlijent->Ime. " " . $resultKlijent->Prezime,
+                        array('class' => 'majstorLink')
+                    ) . "</div><div class = 'col text-center text-break'>".$result->Tekst."</div></div>" .
+                    "</div></div>"; 
+
+                    
+                }
+                if (empty($searchResult)) {
+                    echo "<div class='alert alert-danger text-center' role='alert'>
+                    <h3>Nema majstora za unete parametre pretrage!</h3>
+                    </div>";
+                }
+            ?>
         </div>
-        <div class="row">
-            <div>
-                <table style="font-weight: bold; width: 100%;" class="table text-center">
-                    <tr class="forma" style="margin-bottom: 10px; margin-left: 10px;">
-
-                        <td>
-                            <label>tekst prijave:</label>
-                        </td>
-                        <td>
-                            <label>prijavu podneo: </label>
-                        </td>
-                    </tr>
-                    <tr style="background-color: white; height: 10px;">
-                    </tr>
-                    <tr class="forma" style="margin-bottom: 10px; margin-left: 10px;">
-                        <td style="margin: 20px; margin-bottom: 10px; margin-top: 10px;">
-                            <label>Majstor se nije ponasao profesionalno na poslu, lose uradjen posao na kraju se zid
-                                krunio.</label>
-                        </td>
-                        <td>
-                            <a href="korisnikInfo.html" style="margin-bottom: 10px; margin-top: 10px;">
-                                <label>Milutin Ivkovic</label>
-                                <br>
-                                <label>Korisnik</label>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr style="background-color: white; height: 10px;">
-                    </tr>
-                    <tr class="forma" style="margin-bottom: 10px;">
-                        <td style="margin: 20px; margin-bottom: 10px; margin-top: 10px;">
-                            Previse pije na poslu.
-                        </td>
-                        <td>
-                            <a href="majstorInfo.html" style="margin-bottom: 10px; margin-top: 10px;">
-                                <label>Milorad Trifunovic</label>
-                                <br>
-                                <label>Elektricar</label>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr style="background-color: white; height: 10px;">
-                    </tr>
-                    <tr class="forma" style="margin-bottom: 10px;">
-                        <td>
-                            Korisnik nije isplatio dogovorenu sumu novca.
-                        </td>
-                        <td>
-                            <a href="korisnikInfo.html" style="margin-bottom: 10px; margin-top: 10px;">
-                                <label>Marko Janicijevic</label>
-                                <br>
-                                <label>Korisnik</label>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-
     </div>
 </body>
 

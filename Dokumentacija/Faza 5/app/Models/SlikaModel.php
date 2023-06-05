@@ -23,5 +23,5 @@ class SlikaModel extends Model {
     /**
     * @var array $allowedFields allowedFields
     */
-    protected $allowedFields = ['IdSli', 'ImgData', 'TipSlike', 'ImeSlike', 'Velicina', 'DatumIzmene'];
+    protected $allowedFields = ['IdSli', 'Path'];
 }
