@@ -14,11 +14,13 @@
     <!-- style -->
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/ChatDesign.css">
+    <link rel="stylesheet" href="/css/porukeDesign.css">
     <!-- script -->
     <script src="/js/script.js"></script>
     <script src="/js/cetovanje.js"></script>
     <script src="/js/scriptMajstorInfo.js"></script>
     <script src="/js/receiver.js"></script>
+    <script src="/js/scriptPoruke.js"></script>
     <title>MajstorNaKlik</title>
 </head>
 
@@ -40,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="<?php echo site_url("Chat/showMessages") ?>">
                                 <?php 
                                     $session = session();
                                     if ($session->has("author")){

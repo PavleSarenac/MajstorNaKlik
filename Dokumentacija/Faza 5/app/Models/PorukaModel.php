@@ -43,7 +43,7 @@ class PorukaModel extends Model
             'DatumVreme' => Time::now("Europe/Belgrade", "en_US"),
             'IdPos' => $IdFrom,
             'IdPri' => $IdTo,
-            'Status'=> "pos",
+            'Status'=> 0,
         );
         $this->insert($data, true); // true for auto validation
         return $this->insertID();
@@ -65,10 +65,17 @@ class PorukaModel extends Model
             return null;
     }
 
-    public function getAllReceivedMessages($IdTo){
+    /**
+     * vraca sve poruke korisnika koje su u statusu pos(0), grupisane po IdPos
+     * 
+     * @param integer $IdTo
+     * 
+     * @return Array $poruke
+     */
+    public function getAllReceivedMessagesGroupBy($IdTo){
         $poruke = $this->select('IdPos, COUNT(*) as BrojPoruka')
                     ->where("IdPri", $IdTo)
-                    ->where("Status", "pos")
+                    ->where("Status", 0)
                     ->groupBy('IdPos')
                     ->orderBy("DatumVreme", "ASC")
                     ->findAll();
@@ -80,6 +87,36 @@ class PorukaModel extends Model
         return $poruke;
     }
 
+    /**
+     * vraca sve poruke korisnika koje su u statusu pos(0)
+     * 
+     * @param integer $IdTo
+     * 
+     * @return Array $poruke
+     */
+    public function getAllReceivedMessages($IdTo){
+        $poruke = $this->select('IdPos')
+                    ->where("IdPri", $IdTo)
+                    ->where("Status", 0)
+                    ->orderBy("DatumVreme", "ASC")
+                    ->findAll();
+
+        if($poruke == null){
+            return null;
+        } 
+
+        return $poruke;
+    }
+
+    /**
+     * vraca celu istoriju catovanja 
+     * 
+     * @param integer $id - autor sesije
+     * 
+     * @param integer $idTo - receiver sesije
+     * 
+     * @return Array $poruke
+     */
     public function getAllMessages($id, $idTo){
         $poruke = $this->select()
         ->where("(IdPri = $id AND IdPos = $idTo) OR (IdPri = $idTo AND IdPos = $id)")
@@ -101,9 +138,23 @@ class PorukaModel extends Model
      * @param integer $idTo
      */
     public function setMessagesSeen($idFrom, $idTo){
-        $this->set(['Status' => 'pro'])
+        $this->set(['Status' => 2])
         ->where('IdPri', $idFrom)
         ->where('IdPos', $idTo)
+        ->update();
+    }
+    
+    /**
+     * azurira status poruka, gde je autor(idFrom) primalac, na primljen
+     * 
+     * @param integer $idFrom
+     * 
+     * @param integer $idTo
+     */
+    public function setMessagesReceived($idFrom){
+        $this->set(['Status' => 1])
+        ->where('IdPri', $idFrom)
+        ->where('Status !=', 2)
         ->update();
     }
 
@@ -115,10 +166,33 @@ class PorukaModel extends Model
      * @param integer $IdTo
      */
     public function getAllReceivedMessagesWhileInChat($authorId, $idTo){
+        $poruke = $this->select('IdPos')
+                    ->where("IdPri", $authorId)
+                    ->where("IdPos !=", $idTo)
+                    ->where("Status", 0)
+                    ->orderBy("DatumVreme", "ASC")
+                    ->findAll();
+
+        if($poruke == null){
+            return null;
+        } 
+
+        return $poruke;
+    }
+
+    /**
+     * prima obavestenje o primljenim porukama ali ne od osobe sa kojom se trenutno cetuje
+     * grupisane po IdPos
+     * 
+     * @param integer $authorid
+     * 
+     * @param integer $IdTo
+     */
+    public function getAllReceivedMessagesWhileInChatGroupBy($authorId, $idTo){
         $poruke = $this->select('IdPos, COUNT(*) as BrojPoruka')
                     ->where("IdPri", $authorId)
                     ->where("IdPos !=", $idTo)
-                    ->where("Status", "pos")
+                    ->where("Status", 0)
                     ->groupBy('IdPos')
                     ->orderBy("DatumVreme", "ASC")
                     ->findAll();
@@ -128,6 +202,51 @@ class PorukaModel extends Model
         } 
 
         return $poruke;
+    }
+
+    public function findAllMessageHistory($authorId){
+        $db = \Config\Database::connect();
+        $query = $db->query("
+            SELECT 
+                CASE
+                    WHEN p.IdPri = $authorId THEN p.IdPos
+                    WHEN p.IdPos = $authorId THEN p.IdPri
+                END AS MergedId,
+                MIN(p.Status) AS StatusNew,
+                SUM(CASE WHEN p.Status IN (0, 1) THEN 1 ELSE 0 END) AS SumStatus,
+                MAX(p.DatumVreme) AS DatumVremeNew,
+                r.Ime,
+                r.Prezime,
+                (
+                    SELECT p1.IdPos
+                    FROM poruka p1
+                    WHERE (p1.IdPos = p.IdPos AND p1.IdPri = p.IdPri)
+                    OR
+                    (p1.IdPri = p.IdPos AND p1.IdPos = p.IdPri)
+                    ORDER BY p1.DatumVreme DESC
+                    LIMIT 1
+                ) AS IdPos,
+                (
+                    SELECT p2.IdPri
+                    FROM poruka p2
+                    WHERE (p2.IdPos = p.IdPos AND p2.IdPri = p.IdPri)
+                    OR
+                    (p2.IdPri = p.IdPos AND p2.IdPos = p.IdPri)
+                    ORDER BY p2.DatumVreme DESC
+                    LIMIT 1
+                ) AS IdPri
+            FROM poruka p
+            JOIN registrovani_korisnik r ON r.IdKor = CASE
+                                                    WHEN p.IdPri = $authorId THEN p.IdPos
+                                                    WHEN p.IdPos = $authorId THEN p.IdPri
+                                                END
+            WHERE (p.IdPri = $authorId OR p.IdPos = $authorId)
+            GROUP BY MergedId, r.Ime, r.Prezime
+            ORDER BY StatusNew ASC, DatumVremeNew DESC, MergedId ASC
+        ");
+        
+        $result = $query->getResult();
+        return $result;
     }
 
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 03, 2023 at 05:30 PM
+-- Generation Time: Jun 05, 2023 at 01:17 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.26
 
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `majstor` (
 INSERT INTO `majstor` (`IdMaj`, `BrojRecenzija`, `ProsecnaCena`, `ProsecnaBrzina`, `ProsecanKvalitet`, `IdSpec`) VALUES
 (26, 4, '3.75', '3.75', '3.50', 67),
 (27, 3, '3.33', '3.67', '3.33', 90),
-(28, 4, '4.50', '4.25', '4.25', 73),
+(28, 5, '4.60', '3.80', '4.40', 73),
 (29, 13, '4.70', '4.46', '4.62', 30),
 (30, 4, '4.25', '3.50', '2.75', 81),
 (31, 3, '2.33', '1.67', '1.67', 70),
@@ -126,29 +126,38 @@ CREATE TABLE IF NOT EXISTS `poruka` (
   `DatumVreme` datetime NOT NULL,
   `IdPos` int NOT NULL,
   `IdPri` int NOT NULL,
-  `Status` varchar(3) CHARACTER SET utf8mb3 COLLATE utf8mb3_unicode_ci NOT NULL,
+  `Status` int NOT NULL,
   PRIMARY KEY (`IdP`),
   KEY `IdMaj` (`IdPos`,`IdPri`),
   KEY `IdKli` (`IdPri`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `poruka`
 --
 
 INSERT INTO `poruka` (`IdP`, `Tekst`, `DatumVreme`, `IdPos`, `IdPri`, `Status`) VALUES
-(1, 'cao', '2023-06-01 14:03:00', 47, 32, 'pos'),
-(2, 'aaa', '2023-06-01 14:05:24', 47, 32, 'pos'),
-(3, 'daa', '2023-06-01 14:05:30', 47, 32, 'pos'),
-(4, 'aa', '2023-06-01 14:07:34', 47, 32, 'pos'),
-(5, 'fafsa', '2023-06-01 14:10:26', 47, 32, 'pos'),
-(6, 'asafs', '2023-06-01 14:10:29', 47, 32, 'pos'),
-(7, 'a', '2023-06-01 14:10:30', 47, 32, 'pos'),
-(8, 'aa', '2023-06-01 14:10:33', 47, 32, 'pos'),
-(9, 's', '2023-06-01 14:10:57', 47, 32, 'pos'),
-(10, 'a', '2023-06-01 14:10:59', 47, 32, 'pos'),
-(11, 'ddd', '2023-06-01 14:11:03', 47, 32, 'pos'),
-(12, 'hhhh', '2023-06-01 21:40:48', 43, 30, 'pos');
+(1, 'desi dulou', '2023-06-04 19:48:45', 32, 29, 2),
+(2, 'e evo buraz', '2023-06-04 19:51:39', 29, 32, 2),
+(3, 'desi boro', '2023-06-04 20:11:18', 57, 26, 0),
+(4, 'sta ima, mozes li mi opraviti sporet?', '2023-06-05 00:47:11', 32, 29, 2),
+(5, 'mogu samo mi reci kad ti odgovara?', '2023-06-05 00:57:20', 29, 32, 2),
+(6, 'poruka', '2023-06-05 01:01:01', 47, 29, 2),
+(7, 'poruka', '2023-06-05 01:01:03', 47, 29, 2),
+(8, 'poruka', '2023-06-05 01:01:06', 47, 29, 2),
+(9, 'poruka1', '2023-06-05 01:01:25', 43, 29, 2),
+(10, 'poruka1', '2023-06-05 01:01:27', 43, 29, 2),
+(11, 'poruka1', '2023-06-05 01:01:29', 43, 29, 2),
+(12, 'poruka2', '2023-06-05 01:01:51', 46, 29, 1),
+(13, 'poruka2', '2023-06-05 01:01:52', 46, 29, 1),
+(14, 'poruka2', '2023-06-05 01:01:54', 46, 29, 1),
+(15, 'poruka3', '2023-06-05 01:03:06', 45, 29, 2),
+(16, 'poruka3', '2023-06-05 01:03:08', 45, 29, 2),
+(17, 'poruka3', '2023-06-05 01:03:10', 45, 29, 2),
+(18, 'desi fico', '2023-06-05 01:04:38', 29, 43, 0),
+(19, 'proba', '2023-06-05 01:11:31', 29, 32, 0),
+(20, 'proba', '2023-06-05 01:14:20', 29, 47, 0),
+(21, 'proba', '2023-06-05 03:14:23', 29, 43, 0);
 
 -- --------------------------------------------------------
 
@@ -245,7 +254,8 @@ INSERT INTO `recenzija` (`IdKli`, `IdMaj`, `Tekst`, `DatumVreme`) VALUES
 (53, 29, '', '2023-06-03 16:51:48'),
 (54, 29, '', '2023-06-03 16:52:22'),
 (55, 29, '', '2023-06-03 19:00:30'),
-(56, 29, 'bravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravo', '2023-06-03 19:01:32');
+(56, 29, 'bravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravobravo', '2023-06-03 19:01:32'),
+(57, 28, 'Sve dodbro odradio.', '2023-06-04 20:13:00');
 
 -- --------------------------------------------------------
 
@@ -269,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `registrovani_korisnik` (
   UNIQUE KEY `KorisnickoIme` (`KorisnickoIme`),
   KEY `IdGra` (`IdGra`),
   KEY `IdSli` (`IdSli`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
 --
 -- Dumping data for table `registrovani_korisnik`
@@ -309,7 +319,8 @@ INSERT INTO `registrovani_korisnik` (`IdKor`, `Ime`, `Prezime`, `MejlAdresa`, `K
 (53, 'test4', 'test4', 'test4@gmail.com', 'test4', 'test123', 18, NULL, 'K'),
 (54, 'test5', 'test5', 'test5@gmail.com', 'test5', 'test123', 21, NULL, 'K'),
 (55, 'test6', 'test6', 'test6@gmail.com', 'test6', 'test123', 23, NULL, 'K'),
-(56, 'test7', 'test7', 'test7@gmail.com', 'test7', 'test123', 22, NULL, 'K');
+(56, 'test7', 'test7', 'test7@gmail.com', 'test7', 'test123', 22, NULL, 'K'),
+(57, 'Zoran', 'Riboskic', 'zoki@gmail.com', 'zoki', 'zoki123', 9, NULL, 'K');
 
 -- --------------------------------------------------------
 
@@ -482,7 +493,8 @@ INSERT INTO `telefon` (`IdKor`, `Telefon`) VALUES
 (53, '+381-62-468-313'),
 (54, '+381-62-468-313'),
 (55, '+381-62-468-313'),
-(56, '+381-62-468-313');
+(56, '+381-62-468-313'),
+(57, '+381-65-956-292');
 
 -- --------------------------------------------------------
 

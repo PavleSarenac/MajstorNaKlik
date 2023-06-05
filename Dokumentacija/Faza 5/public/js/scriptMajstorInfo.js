@@ -15,14 +15,8 @@ $(document).ready(function () {
     }
 
     $("#porukaMajstor").on("click", function () {
-        // get sender id from server (session)
         let urlParts = window.location.href.split("/");
         let IdTo = urlParts[urlParts.length - 1];
-        // for (let i = 0; i < 8; i++) {
-            // urlParts.pop();
-        // }
-        // urlParts.push("getAuthorSession"); // push method
-        // let newUrl = urlParts.join("/"); // create url
         let newUrl = clearUrl("getAuthorSession");
         // AJAX req
         $.ajax({

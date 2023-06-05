@@ -1,5 +1,5 @@
 <!--Nikola Nikolic-->
-<div class="cont">
+    <div class="cont">
         <div class="chat-box">
             <!-- <div class="message your-message">
                 <span class="usernameChat">John:</span><br>
@@ -14,9 +14,9 @@
             <!-- More messages can be added here -->
         </div>
         <div class="input-box">
-            <input type="text" id="message-input-chat" placeholder="Unesite Vašu poruku...">
+            <input type="text" id="message-input-chat" placeholder="Type your message...">
             <div class="col-sm-1">
-                <button class="btn btn-dark text-yellow" id="send-button-chat">Pošalji</button>
+                <button class="btn btn-dark text-yellow" id="send-button-chat">Send</button>
             </div>
         </div>
     </div>

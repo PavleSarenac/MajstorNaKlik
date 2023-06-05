@@ -34,6 +34,19 @@ class Chat extends BaseController
         $this->show("cetovanje", []);
     }
 
+    /**
+     * Prikaz stranice sa porukama
+     */
+    public function showMessages()
+    {
+        $this->show("poruke", []);
+    }
+
+    /**
+     * prima poruku koju je korisnik poslao, upisuje je u bazu i salje odgovor korisniku
+     * 
+     * @return Array - [korisnik, tekst poruke, datum i vreme upisa poruke u bazu]
+     */
     public function acceptMessage(){
         $message = isset($_POST['message']) ? $_POST['message'] : null;
         $IdFrom = isset($_POST['from']) ? intval($_POST['from']) : null;
@@ -48,6 +61,11 @@ class Chat extends BaseController
         echo json_encode($response);
     }
 
+    /**
+     * postavlja poruke na procitane
+     * 
+     * @return String - potvrda da je primljeno
+     */
     public function setReadMessages(){
         $idFrom = isset($_POST['idFrom']) ? $_POST['idFrom'] : null;
         $idTo = isset($_POST['idTo']) ? $_POST['idTo'] : null;
@@ -82,6 +100,31 @@ class Chat extends BaseController
         $poruke = $porukaModel->getAllMessages($IdFrom, $IdTo);
         return json_encode($poruke);
     }
+
+    /**
+     * poziva metodu iz modela koja ce da vrati celu istoriju caskanja
+     * 
+     * @return JSON file - [Ime, Prezime, broj neprocitanih poruka]
+     */
+    public function getMessageHistory(){
+        $idAuthor = isset($_POST['idAuthor']) ? $_POST['idAuthor'] : null;
+        $porukaModel = new PorukaModel();
+        $messages = $porukaModel->findAllMessageHistory($idAuthor);
+        echo json_encode($messages);
+    }
+
+    /**
+     * menja status poruka autora na primljeno, pritom ne dirajuci procitane
+     * 
+     * @return String - ACK
+     */
+    public function changeStatusReceived(){
+        $idAuthor = isset($_POST["idAuthor"]) ? $_POST["idAuthor"] : null;
+        $porukaModel = new PorukaModel();
+        $porukaModel->setMessagesReceived($idAuthor);
+        echo json_encode("accepted");
+    }
+
 }
 
 ?>
