@@ -4,18 +4,33 @@ Nikola Nikolic 2020/0357
 */
 $(document).ready(function () {
 
+    /**
+     * promenljiva u kojoj cuvamo "pokazivac" na kontejner u kojem ispisujemo poruke
+     */
     let chatsBox = $(".container-messages");
+    /**
+     * promenljiva u kojoj cuvamo autora sesije kada ga pronadjemo
+     */
     let authorFound;
 
+    /**
+     * proveravamo da li smo na ispravnoj stranici i pozivamo funkciju za inicijalizaciju
+     */
     if (window.location.pathname == "/Chat/showMessages") {
         initFunc();
     }
 
+    /**
+     * wrapper funkcija za poziv odgovarajucih procedura (za prijem istorije caskanja i pokretanje osluskivaca novih poruka u okviru ceta)
+     */
     function ajaxAllMessagesAndAjaxStatus() {
         makeAjaxRequestForAllMessages();
-        makeAjaxRequestForChacgeStatusReceived();
+        makeAjaxRequestForChangeStatusReceived();
     }
 
+    /**
+     * funkcija za inicijalizaciju konteksta stranice
+     */
     function initFunc() {
         makeAjaxRequestForAuthor()
             .then(ajaxAllMessagesAndAjaxStatus)
@@ -24,7 +39,12 @@ $(document).ready(function () {
             });
     }
 
-    function makeAjaxRequestForChacgeStatusReceived() {
+    /**
+     * salje zahtev serveru da upise Status poruka na primljen (1)
+     * 
+     * @returns Response
+     */
+    function makeAjaxRequestForChangeStatusReceived() {
         return new Promise(function (resolve, reject) {
             let newUrl = clearUrl("changeStatusReceived");
             $.ajax({

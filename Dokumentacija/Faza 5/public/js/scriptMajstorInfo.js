@@ -4,6 +4,12 @@ Nikola Nikolic 2020/0357
 */
 $(document).ready(function () {
 
+    /**
+     * prima metodu tekuceg kontrolera koju zelimo da pozovemo, formatira url i vraca tu novu vrednost
+     * 
+     * @param {string} string 
+     * @returns String url
+     */
     function clearUrl(string) {
         let urlParts = window.location.href.split("/");
         if (urlParts.length <= 4) {
@@ -18,6 +24,11 @@ $(document).ready(function () {
         return urlParts.join("/");
     }
 
+    /**
+     * osluskivac ako je pritisnuto dugme za poruku majstoru
+     * 
+     * @return Response
+     */
     $("#porukaMajstor").on("click", function () {
         let urlParts = window.location.href.split("/");
         let IdTo = urlParts[urlParts.length - 1];

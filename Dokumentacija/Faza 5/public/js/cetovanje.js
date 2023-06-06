@@ -16,12 +16,39 @@ $(document).ready(function () {
    */
   const sendButton = $("#send-button-chat");
 
+  /**
+   * integer - id korisnika sa kojim se dopisujemo
+   */
   let IdTo;
+
+  /**
+   * integer - id autora sesije (nas id)
+   */
   let IdFrom;
+
+  /**
+   * autor sesije i ssvi njegovi podaci
+   */
   let authorFound;
+
+  /**
+   * String - korisnicko ime autora sesije
+   */
   let authorUsername;
+
+  /**
+   * String - korisnicko ime korisnika sa kojim se dopisujemo
+   */
   let receiverUsername;
 
+  /**
+   * interval periodicne provere o pristiglim porukama
+   */
+  let interval;
+
+  /**
+   * pomera skrol bar na dno stranice
+   */
   function scrollToBottom() {
     chatBox.scrollTop(chatBox[0].scrollHeight);
   }
@@ -29,7 +56,7 @@ $(document).ready(function () {
   /**
    * ovime obezbedjujemo da se initFunc() iz ovog js fajla poziva samo pri ucitavanju prikaza ceta
    */
-  if (window.location.pathname == "/Chat/showChatting") {
+  if(window.location.pathname == "/Chat/showChatting"){
     initFunc();
     scrollToBottom();
   }
@@ -69,27 +96,27 @@ $(document).ready(function () {
       $.ajax({
         url: newUrl,
         method: 'POST',
-        data: {
-          idFrom: IdFrom,
+        data:{
+          idFrom: IdFrom, 
           idTo: IdTo,
         },
         success: function (response) {
           let jsonResponse = JSON.parse(response);
           let poruke = jsonResponse; // author koristimo u check author funkciji
           // dodati poruke u tag, gde je pos stavi klasu owner, gde je pri other 
-          if (poruke) dodajPoruke(poruke);
+          if(poruke)dodajPoruke(poruke);
           // postaviti poruke gde je autor.IdKor = IdPri i gde je  na procitane
           newUrl = clearUrl("setReadMessages");
           $.ajax({
             url: newUrl,
             method: "POST",
-            data: {
+            data:{
               idFrom: IdFrom,
               idTo: IdTo,
             },
             success: function (response) {
             },
-            error: function (error) {
+            error: function (error){
               reject(error)
             }
           });
@@ -106,8 +133,8 @@ $(document).ready(function () {
    * 
    * @param {Array} poruke 
    */
-  function dodajPoruke(poruke) {
-    for (let i = 0; i < poruke.length; i++) {
+  function dodajPoruke(poruke){
+    for(let i = 0; i < poruke.length; i++){
       let poruka = poruke[i];
       appendMessage(poruka.Tekst, poruka.IdPos, poruka.DatumVreme, "");
     }
@@ -121,35 +148,92 @@ $(document).ready(function () {
    */
   function makeAjaxRequestForAuthor() {
     return new Promise(function (resolve, reject) {
-      let newUrl = clearUrl("getAuthorSession");
+        let newUrl = clearUrl("getAuthorSession");
+        $.ajax({
+            url: newUrl,
+            method: 'POST',
+            success: function (response) {
+                let jsonResponse = JSON.parse(response);
+                let author = jsonResponse; // author koristimo u check author funkciji
+                authorFound = author;
+                resolve(author);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+  }
+
+  /**
+   * wrapper funkcija koja trazi primaoca poruka od servera, a potom postavlja njegovo korisnicko ime
+   * i poziva zahtev ka serveru koji trazi sve istoriju caskanja
+   * 
+   * @return Response
+   */
+  function callGetReceiver(){
+    makeAjaxRequestToGetReceiver()
+    .then((receiver) =>{
+        authorUsername = authorFound.KorisnickoIme;
+        receiverUsername = receiver;
+        makeAjaxRequestForAllMessages();
+        interval = setInterval(makeAjaxRequestForNewMessages, 1000);
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
+
+  /**
+   * proverava da li tekuci autor sesije ima pristiglih poruka dok se nalazi u cetu sa specificnom osobom
+   * 
+   * @returns Response
+   */
+  function makeAjaxRequestForNewMessages(){
+    let newUrl = clearUrl("getNewMessages");
+    let url = new URL(window.location.href);
+    let params = new URLSearchParams(url.search);
+    IdFrom = params.get("IdFrom");
+    IdTo = params.get("IdTo");
+    return new Promise(function (resolve, reject) {
       $.ajax({
         url: newUrl,
-        method: 'POST',
+        method: "POST",
+        data:{
+          author: IdFrom,
+          idfrom: IdTo,
+        },
         success: function (response) {
           let jsonResponse = JSON.parse(response);
-          let author = jsonResponse; // author koristimo u check author funkciji
-          authorFound = author;
-          resolve(author);
+          let messages = jsonResponse;
+          if(messages){
+            dodajPoruke(messages);
+            scrollToBottom();
+            newUrl = clearUrl("setReadMessages");
+            alert(newUrl);
+            $.ajax({
+              url: newUrl,
+              method: "POST",
+              data:{
+                idFrom: IdFrom,
+                idTo: IdTo,
+              },
+              success: function (response) {
+              },
+              error: function (error){
+                reject(error)
+              }
+            });
+          }
         },
         error: function (error) {
+          console.log("Error:", error);
           reject(error);
         }
       });
     });
   }
-
-  function callGetReceiver() {
-    makeAjaxRequestToGetReveiver()
-      .then((receiver) => {
-        authorUsername = authorFound.KorisnickoIme;
-        receiverUsername = receiver;
-        makeAjaxRequestForAllMessages();
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
+  
   /**
    * salje zahtev serveru za proveru da li vec postoje poruke u ovom cetu, ako postoje ispisuje ih 
    * i tamo gde je on primalac postavlja status na procitano
@@ -159,11 +243,11 @@ $(document).ready(function () {
   function initFunc() {
     // nadji autora sesije
     makeAjaxRequestForAuthor()
-      .then(callGetReceiver)
-      .catch(function (error) {
+    .then(callGetReceiver)
+    .catch(function (error) {
         console.error(error);
-      });
-
+    });
+    
   }
 
   /**
@@ -171,7 +255,7 @@ $(document).ready(function () {
    * 
    * @returns String(Response)
    */
-  function makeAjaxRequestToGetReveiver() {
+  function makeAjaxRequestToGetReceiver() {
     let url = new URL(window.location.href);
     let params = new URLSearchParams(url.search);
     let IdTo = params.get("IdTo");
@@ -222,16 +306,16 @@ $(document).ready(function () {
     let messageDiv = $("<div>", { class: "message" });
     // deciding is receiver or sender (for view), null if-branch added while in developing phase
     if (authorFound == null) {
-      if (username == "") username = authorUsername;
+      if(username == "")username = authorUsername;
       messageDiv.addClass("your-message");
     }
     else {
       if (authorFound.IdKor == IdFrom) {
-        if (username == "") username = authorUsername;
+        if(username == "")username = authorUsername;
         messageDiv.addClass("your-message");
       }
       else {
-        if (username == "") username = receiverUsername;
+        if(username == "")username = receiverUsername;
         messageDiv.addClass("other-message");
       }
     }
@@ -247,7 +331,7 @@ $(document).ready(function () {
 
   /**
    * funkcija za slanje poruka
-   * @returns server Response
+   * @returns Response
    */
   function sendMessage() {
     if (isSending || messageInput.val() === "") return;

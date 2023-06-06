@@ -41,6 +41,8 @@ class Chat extends BaseController
 
     /**
      * Prikaz stranice sa porukama
+     * 
+     * @return Response
      */
     public function showMessages()
     {
@@ -50,7 +52,7 @@ class Chat extends BaseController
     /**
      * prima poruku koju je korisnik poslao, upisuje je u bazu i salje odgovor korisniku
      * 
-     * @return Array - [korisnik, tekst poruke, datum i vreme upisa poruke u bazu]
+     * @return JSON file
      */
     public function acceptMessage(){
         $message = isset($_POST['message']) ? $_POST['message'] : null;
@@ -69,14 +71,14 @@ class Chat extends BaseController
     /**
      * postavlja poruke na procitane
      * 
-     * @return String - potvrda da je primljeno
+     * @return String - ACK
      */
     public function setReadMessages(){
         $idFrom = isset($_POST['idFrom']) ? $_POST['idFrom'] : null;
         $idTo = isset($_POST['idTo']) ? $_POST['idTo'] : null;
         $porukaModel = new PorukaModel();
         $porukaModel->setMessagesSeen($idFrom, $idTo);
-        echo "primljeno";
+        echo "accepted";
     }
 
     /**
@@ -109,7 +111,7 @@ class Chat extends BaseController
     /**
      * poziva metodu iz modela koja ce da vrati celu istoriju caskanja
      * 
-     * @return JSON file - [Ime, Prezime, broj neprocitanih poruka]
+     * @return JSON file
      */
     public function getMessageHistory(){
         $idAuthor = isset($_POST['idAuthor']) ? $_POST['idAuthor'] : null;
@@ -130,6 +132,18 @@ class Chat extends BaseController
         echo json_encode("accepted");
     }
 
+    /**
+     *  salje zahtev za proveru pristiglih poruka za autora dok je u cetu
+     * 
+     * @return JSON file
+    */    
+    public function getNewMessages(){
+        $author = isset($_POST["author"]) ? $_POST["author"] : null;
+        $IdFrom = isset($_POST["idfrom"]) ? $_POST["idfrom"] : null;
+        $porukaModel = new PorukaModel();
+        $poruke = $porukaModel->getNewMessages($author, $IdFrom);
+        echo json_encode($poruke);
+    }
 }
 
 ?>

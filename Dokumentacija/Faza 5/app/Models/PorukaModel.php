@@ -59,7 +59,7 @@ class PorukaModel extends Model
      * 
      * @param integer $IdP
      * 
-     * @return Timestamp
+     * @return String
      */
     public function getTimestampFromId($IdP)
     {
@@ -209,6 +209,13 @@ class PorukaModel extends Model
         return $poruke;
     }
 
+    /**
+     * trazi celu istoriju caskanja za autora sesije
+     * 
+     * @param integer $authorId - autor sesije
+     * 
+     * @return Array [{integer MergedId,integer StatusNew,integer SumStatus,String DatumVreme,String Ime,String Prezime,integer IdPos,integer IdPri}]
+     */
     public function findAllMessageHistory($authorId){
         $db = \Config\Database::connect();
         $query = $db->query("
@@ -241,10 +248,11 @@ class PorukaModel extends Model
                     LIMIT 1
                 ) AS IdPri
             FROM poruka p
-            JOIN registrovani_korisnik r ON r.IdKor = CASE
-                                                    WHEN p.IdPri = $authorId THEN p.IdPos
-                                                    WHEN p.IdPos = $authorId THEN p.IdPri
-                                                END
+            JOIN registrovani_korisnik r ON r.IdKor = 
+                CASE
+                    WHEN p.IdPri = $authorId THEN p.IdPos
+                    WHEN p.IdPos = $authorId THEN p.IdPri
+                END
             WHERE (p.IdPri = $authorId OR p.IdPos = $authorId)
             GROUP BY MergedId, r.Ime, r.Prezime
             ORDER BY StatusNew ASC, DatumVremeNew DESC, MergedId ASC
@@ -254,6 +262,29 @@ class PorukaModel extends Model
         return $result;
     }
 
+    /**
+     * proverava da li autor sesije ima pristiglih poruka od osobe sa idjem IdFrom
+     * 
+     * @param integer $author - autor sesije
+     * 
+     * @param integer $IdFrom - korisnik od koga se trazi prijem poruka
+     * 
+     * @return Array [poruka] $poruke
+     */
+    public function getNewMessages($author, $IdFrom){
+        $poruke = $this->where("IdPri", $author)
+            ->where("IdPos", $IdFrom)
+            ->where("Status", 0)
+            ->orderBy("DatumVreme", "ASC")
+            ->findAll();
+        
+        if($poruke) return $poruke;
+        else return null;
+    }
+
+    
 }
+
+
 
 ?>
