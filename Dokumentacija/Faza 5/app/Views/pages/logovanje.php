@@ -1,4 +1,7 @@
-<!-- Ljubica Majstorovic, Pavle Sarenac, Nikola Nikolic -->
+<!--
+Autori: 
+Nikola Nikolic 2020/0357
+-->
         <div class="row text-center">
             <h1><strong>Prijava:</strong></h1>
         </div>

@@ -1,4 +1,6 @@
-<!--Nikola Nikolic-->
+<!--
+Autori: Nikola Nikolic 2020/0357
+-->
     <div class="cont">
         <div class="chat-box">
             <!-- <div class="message your-message">

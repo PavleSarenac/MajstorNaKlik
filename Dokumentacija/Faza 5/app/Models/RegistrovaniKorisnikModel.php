@@ -1,5 +1,12 @@
 <?php 
 
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Nikola Nikolic 2020/0357
+ * Pavle Sarenac 2020/0359
+ */
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -50,6 +57,14 @@ class RegistrovaniKorisnikModel extends Model {
         return $this->where("KorisnickoIme", $username)->findAll();
     }
 
+    /**
+     * Ova funkcija vraca red koji se dobija spajanjem vise tabela u kom imamo sve potrebne podatke za majstora (grad, specijalnosti,
+     * telefon).
+     * 
+     * @param int $IdKor IdKor
+     * 
+     * @return array
+     */
     public function getAllForHandyman($IdKor) {
         $db = \Config\Database::connect();
         $builder = $db->table("registrovani_korisnik");
@@ -61,6 +76,13 @@ class RegistrovaniKorisnikModel extends Model {
                 ->where("registrovani_korisnik.IdKor", $IdKor)->get()->getResult();
     }
 
+    /**
+     * Ova funkcija vraca red koji se dobija spajanjem vise tabela u kom imamo sve potrebne podatke za korisnika (grad, telefon).
+     * 
+     * @param int $IdKor IdKor
+     * 
+     * @return array
+     */
     public function getAllForRegUser($IdKor) {
         $db = \Config\Database::connect();
         $builder = $db->table("registrovani_korisnik");
@@ -70,10 +92,24 @@ class RegistrovaniKorisnikModel extends Model {
         ->where("registrovani_korisnik.IdKor", $IdKor)->get()->getResult();
     }
 
+    /**
+     * Vraca red za korisnika sa prosledjenom mejl adresom.
+     * 
+     * @param string $mail Mail
+     * 
+     * @return array
+     */
     public function getUserWithCertainMailAddress($mail){
         return $this->where("MejlAdresa", $mail)->findAll();
     }
 
+    /**
+     * Vraca korisnika sa prosledjenim id-em.
+     * 
+     * @param int $id Id
+     * 
+     * @return array
+     */
     public function getUsernameFromId($id){
         return $this->where("IdKor", $id)->findAll();
     }

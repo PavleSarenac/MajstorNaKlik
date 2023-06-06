@@ -1,3 +1,7 @@
+/*
+Autori:
+Nikola Nikolic 2020/0357
+*/
 $(document).ready(function () {
   /**
    * promeljiva u kojoj se cuva chat box
@@ -25,7 +29,7 @@ $(document).ready(function () {
   /**
    * ovime obezbedjujemo da se initFunc() iz ovog js fajla poziva samo pri ucitavanju prikaza ceta
    */
-  if(window.location.pathname == "/Chat/showChatting"){
+  if (window.location.pathname == "/Chat/showChatting") {
     initFunc();
     scrollToBottom();
   }
@@ -65,27 +69,27 @@ $(document).ready(function () {
       $.ajax({
         url: newUrl,
         method: 'POST',
-        data:{
-          idFrom: IdFrom, 
+        data: {
+          idFrom: IdFrom,
           idTo: IdTo,
         },
         success: function (response) {
           let jsonResponse = JSON.parse(response);
           let poruke = jsonResponse; // author koristimo u check author funkciji
           // dodati poruke u tag, gde je pos stavi klasu owner, gde je pri other 
-          if(poruke)dodajPoruke(poruke);
+          if (poruke) dodajPoruke(poruke);
           // postaviti poruke gde je autor.IdKor = IdPri i gde je  na procitane
           newUrl = clearUrl("setReadMessages");
           $.ajax({
             url: newUrl,
             method: "POST",
-            data:{
+            data: {
               idFrom: IdFrom,
               idTo: IdTo,
             },
             success: function (response) {
             },
-            error: function (error){
+            error: function (error) {
               reject(error)
             }
           });
@@ -102,8 +106,8 @@ $(document).ready(function () {
    * 
    * @param {Array} poruke 
    */
-  function dodajPoruke(poruke){
-    for(let i = 0; i < poruke.length; i++){
+  function dodajPoruke(poruke) {
+    for (let i = 0; i < poruke.length; i++) {
       let poruka = poruke[i];
       appendMessage(poruka.Tekst, poruka.IdPos, poruka.DatumVreme, "");
     }
@@ -117,35 +121,35 @@ $(document).ready(function () {
    */
   function makeAjaxRequestForAuthor() {
     return new Promise(function (resolve, reject) {
-        let newUrl = clearUrl("getAuthorSession");
-        $.ajax({
-            url: newUrl,
-            method: 'POST',
-            success: function (response) {
-                let jsonResponse = JSON.parse(response);
-                let author = jsonResponse; // author koristimo u check author funkciji
-                authorFound = author;
-                resolve(author);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
+      let newUrl = clearUrl("getAuthorSession");
+      $.ajax({
+        url: newUrl,
+        method: 'POST',
+        success: function (response) {
+          let jsonResponse = JSON.parse(response);
+          let author = jsonResponse; // author koristimo u check author funkciji
+          authorFound = author;
+          resolve(author);
+        },
+        error: function (error) {
+          reject(error);
+        }
+      });
     });
   }
 
-  function callGetReceiver(){
+  function callGetReceiver() {
     makeAjaxRequestToGetReveiver()
-    .then((receiver) =>{
+      .then((receiver) => {
         authorUsername = authorFound.KorisnickoIme;
         receiverUsername = receiver;
         makeAjaxRequestForAllMessages();
       })
-      .catch((error) =>{
+      .catch((error) => {
         console.error(error);
       });
   }
-  
+
   /**
    * salje zahtev serveru za proveru da li vec postoje poruke u ovom cetu, ako postoje ispisuje ih 
    * i tamo gde je on primalac postavlja status na procitano
@@ -155,11 +159,11 @@ $(document).ready(function () {
   function initFunc() {
     // nadji autora sesije
     makeAjaxRequestForAuthor()
-    .then(callGetReceiver)
-    .catch(function (error) {
+      .then(callGetReceiver)
+      .catch(function (error) {
         console.error(error);
-    });
-    
+      });
+
   }
 
   /**
@@ -218,16 +222,16 @@ $(document).ready(function () {
     let messageDiv = $("<div>", { class: "message" });
     // deciding is receiver or sender (for view), null if-branch added while in developing phase
     if (authorFound == null) {
-      if(username == "")username = authorUsername;
+      if (username == "") username = authorUsername;
       messageDiv.addClass("your-message");
     }
     else {
       if (authorFound.IdKor == IdFrom) {
-        if(username == "")username = authorUsername;
+        if (username == "") username = authorUsername;
         messageDiv.addClass("your-message");
       }
       else {
-        if(username == "")username = receiverUsername;
+        if (username == "") username = receiverUsername;
         messageDiv.addClass("other-message");
       }
     }

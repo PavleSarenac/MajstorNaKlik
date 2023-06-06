@@ -1,3 +1,7 @@
+/*
+Autori:
+Nikola Nikolic 2020/0357
+*/
 $(document).ready(function () {
     /**
      * @var Interval
@@ -154,15 +158,15 @@ $(document).ready(function () {
      * @return Response
      */
     function initFunc() {
-        if(window.location.pathname === "/Chat/showChatting"){
+        if (window.location.pathname === "/Chat/showChatting") {
             makeAjaxRequestForMessagesChat();
         }
-        else{
+        else {
             makeAjaxRequestForAuthor()
-            .then(firstCallForMessages)
-            .catch(function (error) {
-                console.error(error);
-            });
+                .then(firstCallForMessages)
+                .catch(function (error) {
+                    console.error(error);
+                });
         }
 
     }

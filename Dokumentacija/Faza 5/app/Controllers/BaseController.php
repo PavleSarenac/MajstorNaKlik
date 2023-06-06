@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Nikola Nikolic 2020/0357
+ * Pavle Sarenac 2020/0359
+ */
+
 namespace App\Controllers;
 
 use App\Models\RecenzijaModel;
@@ -78,6 +85,7 @@ abstract class BaseController extends Controller
      * @param string $city City
      * @param string $phone Phone
      * @param string $email Email
+     * @param int $id IdMajstora
      * 
      * @return void
      */
@@ -111,6 +119,7 @@ abstract class BaseController extends Controller
      * @param string $city City
      * @param string $phone Phone
      * @param string $email Email
+     * @param int $id IdKorisnika
      * 
      * @return void
      */
@@ -186,6 +195,16 @@ abstract class BaseController extends Controller
         throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
     }
 
+    /**
+     * Ova funkcija sluzi za izlistavanje svih tekstualnih recenzija za majstora sa id-em $handymanId.
+     * 
+     * @param int $handymanId HandymanId
+     * @param string $name Name
+     * @param string $surname Surname
+     * @param string $specialty Specialty
+     * 
+     * @return void
+     */
     public function readHandymanReviews($handymanId, $name, $surname, $specialty) {
         $_SESSION["func"] = "reviews";
         $recenzijaModel = new RecenzijaModel();
@@ -200,6 +219,14 @@ abstract class BaseController extends Controller
         ]);
     }
 
+    /**
+     * Ova funkcija se poziva svaki put kada majstor pri listanju tekstualnih recenzija nekog majstora dodje do dna stranice, a taj
+     * majstor ima jos recenzija koje nisu prikazane bile u bazi - tada se te recenzije dinamicki ucitavaju. Ova funkcija se poziva
+     * preko AJAX zahteva. Povratna vrednost funkcije je string koji je zapravo html kod u kom su te nove recenzije koje treba
+     * prikazati.
+     * 
+     * @return string 
+     */
     public function fetchNextResultsReviews() {
         $rowNumber = (int)$this->session->get("reviewsRowNumber");
         $remainingRows = count($this->session->get("reviewsResult")) - $rowNumber;
@@ -236,7 +263,11 @@ abstract class BaseController extends Controller
 
     /**
      * Ova funkcija se izvrsava kao posledica AJAX zahteva kada korisnik scroll-uje kroz rezultate svoje pretrage i dodje do dna 
-     * stranice - tada se dinamicki ucitava novi blok majstora u stranicu.
+     * stranice - tada se dinamicki ucitava novi blok majstora u stranicu. Posto se na vise razlicitih stranica poziva ova funkcija,
+     * na njenom pocetku radimo preusmeravanje na odgvoarajuce druge funkcije po potrebi (ako umesto rezultata pretrage zapravo
+     * treba prikazati recenzije konkretnog majstora, sve prijave u bazi ili prijave konkretnog majstora).
+     * 
+     * @return string
      */
     public function fetchNextResults() {
         $controller = $this->session->get("controller");

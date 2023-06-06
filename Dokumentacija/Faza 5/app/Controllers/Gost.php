@@ -1,13 +1,14 @@
 <?php
 
 /**
-*Gost - klasa kontroler koja je odgovorna za logovanje korisnika i registraciju, nasledjuje iz BaseController-a pretragu
-*
-*@version 1.0
-*
-*
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Nikola Nikolic 2020/0357
+ * Pavle Sarenac 2020/0359
  */
+
 namespace App\Controllers;
+
 use App\Models\RegistrovaniKorisnikModel;
 use App\Models\MajstorModel;
 use App\Models\TelefonModel;

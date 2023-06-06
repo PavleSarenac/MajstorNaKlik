@@ -1,4 +1,8 @@
-        <div class="container-messages text-center col-sm-8 offset-sm-2">
+<!--
+Autori:
+Nikola Nikolic 2020/0357
+-->
+<div class="container-messages text-center col-sm-8 offset-sm-2">
             <div class="row">
                 <div class="col">
                     <h1><strong>Prikaz poruka: </strong></h1>

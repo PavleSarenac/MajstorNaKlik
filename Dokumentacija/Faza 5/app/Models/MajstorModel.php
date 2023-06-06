@@ -1,4 +1,12 @@
-<?php namespace App\Models;
+<?php 
+
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Pavle Sarenac 2020/0359
+ */
+
+namespace App\Models;
 
 use CodeIgniter\Model;
 
@@ -38,6 +46,13 @@ class MajstorModel extends Model
              // Return the inserted ID
         }
 
+        /**
+         * Ova funkcija vraca red tabele u kom je jedna od kolona specijalnost majstora sa $IdMaj.
+         * 
+         * @param int $IdMaj IdMaj
+         * 
+         * @return array
+         */
         public function getSpecialty($IdMaj) {
                 $db = \Config\Database::connect();
                 $builder = $db->table("majstor");
@@ -47,6 +62,13 @@ class MajstorModel extends Model
                 return $builder->get()->getResult();
         }
        
+        /**
+         * Ova funkcija vraca red tabele u kom je jedna od kolona ime majstora sa $IdMaj.
+         * 
+         * @param int $IdMaj IdMaj
+         * 
+         * @return array
+         */
         public function getName($IdMaj) {
                 $db = \Config\Database::connect();
                 $builder = $db->table("majstor");
@@ -56,6 +78,13 @@ class MajstorModel extends Model
                 return $builder->get()->getResult();
         }
 
+        /**
+         * Ova funkcija vraca red tabele u kom je jedna od kolona prezime majstora sa $IdMaj.
+         * 
+         * @param int $IdMaj IdMaj
+         * 
+         * @return array
+         */
         public function getSurname($IdMaj) {
                 $db = \Config\Database::connect();
                 $builder = $db->table("majstor");
@@ -65,6 +94,16 @@ class MajstorModel extends Model
                 return $builder->get()->getResult();
         }
 
+        /**
+         * Ova funkcija treba da azurira prosecne ocena majstora nakon sto korisnik oceni majstora.
+         * 
+         * @param int $handymanId HandymanId
+         * @param int $priceRating PriceRating
+         * @param int $speedRating SpeedRating
+         * @param int $qualityRating QualityRating
+         * 
+         * @return void
+         */
         public function updateRatings($handymanId, $priceRating, $speedRating, $qualityRating) {
                 $db = \Config\Database::connect();
                 $builder = $db->table("majstor");

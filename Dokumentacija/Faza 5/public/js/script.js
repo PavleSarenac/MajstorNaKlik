@@ -1,3 +1,7 @@
+/*
+Autori:
+Pavle Sarenac 2020/0359
+*/
 $(document).ready(function () {
 
     function setPriceRadio() {

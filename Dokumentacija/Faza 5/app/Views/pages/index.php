@@ -1,4 +1,9 @@
-<!-- Ljubica Majstorovic, Pavle Sarenac, Nikola Nikolic -->
+<!--
+Autori: 
+Ljubica Majstorovic 2020/0253
+Nikola Nikolic 2020/0357
+Pavle Sarenac 2020/0359
+-->
         <div class="row text-center">
             <h1><strong>Pretražite majstore:</strong></h1>
         </div>

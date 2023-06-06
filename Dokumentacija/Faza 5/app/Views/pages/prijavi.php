@@ -1,3 +1,7 @@
+<!--
+Autori:
+Ljubica Majstorovic 2020/0253
+-->
 <div class="row text-center">
     <div class="row">
         <div class="col">

@@ -1,5 +1,7 @@
-<!--Nikola Nikolic-->
-
+<!--
+Autori: 
+Ljubica Majstorovic 2020/0253
+-->
 <div id="searchResultsContainer">
             <?php
             use App\Models\PrijavaModel;

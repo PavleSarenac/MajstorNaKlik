@@ -1,32 +1,36 @@
-$(document).ready(function(){
+/*
+Autori:
+Nikola Nikolic 2020/0357
+*/
+$(document).ready(function () {
 
     let chatsBox = $(".container-messages");
     let authorFound;
-    
-    if(window.location.pathname == "/Chat/showMessages"){
+
+    if (window.location.pathname == "/Chat/showMessages") {
         initFunc();
     }
 
-    function ajaxAllMessagesAndAjaxStatus(){
+    function ajaxAllMessagesAndAjaxStatus() {
         makeAjaxRequestForAllMessages();
         makeAjaxRequestForChacgeStatusReceived();
     }
 
-    function initFunc(){
+    function initFunc() {
         makeAjaxRequestForAuthor()
-        .then(ajaxAllMessagesAndAjaxStatus)
-        .catch(function (error) {
-            console.error(error);
-        });
+            .then(ajaxAllMessagesAndAjaxStatus)
+            .catch(function (error) {
+                console.error(error);
+            });
     }
 
-    function makeAjaxRequestForChacgeStatusReceived(){
-        return new Promise(function(resolve, reject){
+    function makeAjaxRequestForChacgeStatusReceived() {
+        return new Promise(function (resolve, reject) {
             let newUrl = clearUrl("changeStatusReceived");
             $.ajax({
                 url: newUrl,
                 method: "POST",
-                data:{
+                data: {
                     idAuthor: authorFound.IdKor,
                 },
                 success: function (response) {
@@ -73,8 +77,8 @@ $(document).ready(function(){
     * 
     * @param {Array} poruke 
     */
-    function addChats(chats){
-        for(let i = 0; i < chats.length; i++){
+    function addChats(chats) {
+        for (let i = 0; i < chats.length; i++) {
             let chat = chats[i];
             appendChat(chat.MergedId, chat.Ime, chat.Prezime, chat.SumStatus, chat.StatusNew, chat.IdPos, chat.IdPri);
         }
@@ -90,41 +94,41 @@ $(document).ready(function(){
    * @param {integer} IdPos
    * @param {integer} IdPri
    */
-  function appendChat(Id, Name, Surname, SumStatus, StatusNew, IdPos, IdPri) {
-    let chatDiv = $("<div></div>");
-    chatDiv.addClass("row");
-    chatDiv.addClass("person");
-    let set = 0
-    if(StatusNew == 0 && IdPos != authorFound.IdKor){
-        chatDiv.addClass("status-0");
-        set = 1;
+    function appendChat(Id, Name, Surname, SumStatus, StatusNew, IdPos, IdPri) {
+        let chatDiv = $("<div></div>");
+        chatDiv.addClass("row");
+        chatDiv.addClass("person");
+        let set = 0
+        if (StatusNew == 0 && IdPos != authorFound.IdKor) {
+            chatDiv.addClass("status-0");
+            set = 1;
+        }
+        if (StatusNew == 1 && IdPos != authorFound.IdKor) {
+            chatDiv.addClass("status-1");
+            set = 1;
+        }
+        if (StatusNew == 2) {
+            chatDiv.addClass("status-2");
+            set = 1;
+        }
+        if (set == 0) {
+            chatDiv.addClass("status-2");
+            set = 1;
+        }
+        chatDiv.attr("id", Id);
+        let h2Tag = $("<h2></h2>");
+        h2Tag.text(Name + " " + Surname);
+        let spanText = $("<span></span>");
+        spanText.text("Broj nepročitanih poruka: ");
+        let spanBrojNeprocitanih = $("<span></span>");
+        spanBrojNeprocitanih.text(SumStatus);
+        if (StatusNew != 2 && IdPos == authorFound.IdKor) {
+            spanBrojNeprocitanih.text(0);
+        }
+
+        chatDiv.append(h2Tag, spanText, spanBrojNeprocitanih);
+        chatsBox.append(chatDiv);
     }
-    if(StatusNew == 1 && IdPos != authorFound.IdKor){
-        chatDiv.addClass("status-1");
-        set = 1;
-    }
-    if(StatusNew == 2){
-        chatDiv.addClass("status-2");
-        set = 1;
-    }
-    if(set == 0){
-        chatDiv.addClass("status-2");
-        set = 1;
-    }
-    chatDiv.attr("id", Id);
-    let h2Tag = $("<h2></h2>");
-    h2Tag.text(Name + " " + Surname);
-    let spanText = $("<span></span>");
-    spanText.text("Broj nepročitanih poruka: ");
-    let spanBrojNeprocitanih = $("<span></span>");
-    spanBrojNeprocitanih.text(SumStatus);
-    if(StatusNew != 2 && IdPos == authorFound.IdKor){
-        spanBrojNeprocitanih.text(0);
-    }
-    
-    chatDiv.append(h2Tag, spanText, spanBrojNeprocitanih);
-    chatsBox.append(chatDiv);
-  }
 
     /**
     * proverava da li sesija ima autora
@@ -174,10 +178,10 @@ $(document).ready(function(){
     /**
      * event listener za klik na odredjeni div kojim se dalje poziva trazena funkcija
      */
-    $(document).on("click", "div.person", function() {
+    $(document).on("click", "div.person", function () {
         let IdFrom = authorFound.IdKor;
         let IdTo = $(this).attr("id");
         let newUrl = clearUrl("showChatting?IdFrom=" + IdFrom + "&IdTo=" + IdTo);
         window.location.href = newUrl;
-      });
+    });
 });

@@ -1,5 +1,10 @@
 <?php namespace App\Models;
 
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ */
+
 use CodeIgniter\Model;
 
 /**

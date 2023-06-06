@@ -1,4 +1,6 @@
-<!--Ljubica Majstorovic-->
+<!--
+Autori: Ljubica Majstorovic 2020/0253
+-->
 <div class="row text-center">
             <h1><strong>Ažuriraj telefon:</strong></h1>
         </div>

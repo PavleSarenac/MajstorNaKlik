@@ -1,4 +1,12 @@
-<?php namespace App\Models;
+<?php 
+
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Pavle Sarenac 2020/0359
+ */
+
+namespace App\Models;
 
 use CodeIgniter\Model;
 

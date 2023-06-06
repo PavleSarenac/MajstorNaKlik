@@ -1,3 +1,7 @@
+/*
+Autori:
+Nikola Nikolic 2020/0357
+*/
 .person {
     border: 1px solid #faff9a;
     padding: 10px;
@@ -9,10 +13,10 @@
     background-color: #f2f2f2;
 }
 
-.status-0{
+.status-0 {
     background-color: gold;
 }
 
-.status-1{
+.status-1 {
     background-color: lightyellow;
 }

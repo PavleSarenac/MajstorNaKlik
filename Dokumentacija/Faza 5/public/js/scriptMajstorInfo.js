@@ -1,3 +1,7 @@
+/*
+Autori:
+Nikola Nikolic 2020/0357
+*/
 $(document).ready(function () {
 
     function clearUrl(string) {

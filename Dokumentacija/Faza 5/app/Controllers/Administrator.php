@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ */
+
 namespace App\Controllers;
 
 use App\Models\MajstorModel;

@@ -1,5 +1,7 @@
-
-<!--Nikola Nikolic-->
+<!--
+Autori: 
+Ljubica Majstorovic 2020/0253
+-->
 <div class="row text-center">
             <h1><strong>Sve prijave:</strong></h1>
         </div>

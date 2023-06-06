@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Autori:
+ * Pavle Sarenac 2020/0359
+ */
+
 namespace App\Controllers;
 
 use App\Models\MajstorModel;

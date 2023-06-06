@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Autori:
+ * Nikola Nikolic 2020/0357
+ */
+
 namespace App\Filters;
 
 use CodeIgniter\Filters\FilterInterface;

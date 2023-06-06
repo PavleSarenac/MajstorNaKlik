@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Autori:
+ * Pavle Sarenac 2020/0359
+ */
+
 namespace App\Models;
 
 use CodeIgniter\Model;
@@ -28,10 +33,23 @@ class RecenzijaModel extends Model
      */
     protected $allowedFields = ["IdKli", "IdMaj", "Tekst", "DatumVreme"];
 
+    /**
+    * saveReview funkcija radi insert novog reda u tabeli
+    * @param array $data Data
+    * 
+    * @return void
+    */
     public function saveReview($data) {
         $this->insert($data, true);
     }
 
+    /**
+     * Ova funkcija proverava da li je korisnik sa Id-em $userId vec ocenio majstora sa Id-em $handymanId.
+     * @param int $userId UserId
+     * @param int $handymanId HandymanId
+     * 
+     * @return bool
+     */
     public function isAlreadyReviewed($userId, $handymanId) {
         $db = \Config\Database::connect();
         $builder = $db->table("recenzija");
@@ -44,6 +62,13 @@ class RecenzijaModel extends Model
         }
     }
 
+    /**
+     * Ova funkcija dohvata sve recenzije majstora sa Id-em $handymanId.
+     * 
+     * @param int $handymanId HandymanId
+     * 
+     * @return array
+     */
     public function getReviews($handymanId) {
         $db = \Config\Database::connect();
         $builder = $db->table("recenzija");

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Autori:
+ * Ljubica Majstorovic 2020/0253
+ * Nikola Nikolic 2020/0357
+ * Pavle Sarenac 2020/0359
+ */
+
 namespace App\Controllers;
 
 /**
